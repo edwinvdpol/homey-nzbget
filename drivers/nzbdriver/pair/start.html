@@ -1,0 +1,68 @@
+<style type="text/css">
+    #pair-template {height:100%;display:flex;flex-direction:column;align-items:center}
+    #pair-form {position:relative;width:90%}
+    .row {margin-bottom:1em}
+    .logo {display:block;position:relative;width:25vw;height:25vw;margin:10vw auto;background-position:center center;background-repeat:no-repeat;background-size:contain;background-image:url(../assets/icon.svg)}
+    .invalid > label {color: #FF0000 !important}
+    .invalid > input {border-bottom:1px solid #FF0000 !important}
+    .button {width:100% !important}
+    .button:disabled,.button[disabled] {background-color:#ffffff !important;color: #ffffff !important;}
+</style>
+
+<div id="pair-template">
+    <div id="pair-form">
+        <div class="logo"></div>
+
+        <div class="row">
+            <label for="pair-url">URL</label>
+            <input id="pair-url" placeholder="http://127.0.0.1" type="text" value="http://192.168.1.7" />
+        </div>
+
+        <div class="row">
+            <label for="pair-port" data-i18n="port">Port</label>
+            <input id="pair-port" placeholder="6789" type="text" value="" />
+        </div>
+
+        <div class="row">
+            <label for="pair-user" data-i18n="username">Username</label>
+            <input id="pair-user" placeholder="nzbget" type="text" value="" />
+        </div>
+
+        <div class="row">
+            <label for="pair-pass" data-i18n="password">Password</label>
+            <input id="pair-pass" placeholder="tegbzn6789" type="password" value="" />
+        </div>
+
+        <div class="row">
+            <button class="button" id="pair-button" onclick="search();" data-i18n="login">Login</button>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function search () {
+        Homey.showLoadingOverlay();
+
+        var pBtn = document.getElementById('pair-button');
+
+        pBtn.disabled = true;
+
+        let data = {
+            url: document.getElementById('pair-url').value,
+            port: document.getElementById('pair-port').value,
+            user: document.getElementById('pair-user').value,
+            pass: document.getElementById('pair-pass').value
+        };
+
+        Homey.emit('search_devices', data, (error) => {
+            pBtn.disabled = false;
+
+            if (error) {
+                Homey.hideLoadingOverlay();
+                Homey.alert(error.message);
+            } else {
+                Homey.showView('list_devices');
+            }
+        });
+    }
+</script>

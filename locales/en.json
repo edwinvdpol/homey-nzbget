@@ -1,0 +1,13 @@
+{
+    "error": {
+        "access": "Access has been denied",
+        "connection": "Could not connect to device",
+        "internal": "An internal server error occurred",
+        "login": "Username or password is invalid",
+        "unknown": "An unknown error occured"
+    },
+    "login": "Login",
+    "password": "Password",
+    "port": "Port",
+    "username": "Username"
+}
