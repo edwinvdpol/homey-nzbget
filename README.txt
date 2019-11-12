@@ -1,13 +1,11 @@
-# NZBGet for Homey
-
-Monitor and control your [NZBGet](https://nzbget.net/) servers.
+Monitor and control your NZBGet servers.
 
 Homey will automatically fetch the statistics from the NZB server.
 
-The update interval can be changed in the *device settings*.
+The update interval can be changed in the device settings.
 
+Supported statistics:
 
-## Supported statistics
 - Article cache (MB)
 - Average download speed (MB/s)
 - Download speed (MB/s)
@@ -19,12 +17,12 @@ The update interval can be changed in the *device settings*.
 - Remaining download (MB)
 - Server uptime
 
+Supported actions:
 
-## Supported actions
 - Pause and resume download via toggle component
 
+Flowcards:
 
-## Flowcards
 - Pause download queue
 - Resume download queue
 - Reload the server
@@ -32,19 +30,17 @@ The update interval can be changed in the *device settings*.
 - Set download speed limit
 - Shutdown the server
 
+Supported settings:
 
-## Supported settings
 - Update interval (seconds)
 
+Supported languages:
 
-## Supported languages
 - English
 - Dutch (Nederlands)
 
+If you have any questions or feedback, please contact me on Slack.
 
-## Support / feedback
-If you have any questions or feedback, please contact me on [Slack](https://athomcommunity.slack.com/team/evdpol).
-
-Please report issues and feature requests at the [issues section](https://github.com/edwinvdpol/net.nzbget/issues) on GitHub.
+Please report issues and feature requests at the issues section on GitHub.
 
 This app is tested with NZBGet v21.0, but should work with v15.0 and newer.
