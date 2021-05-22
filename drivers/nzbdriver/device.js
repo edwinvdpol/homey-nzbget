@@ -8,19 +8,6 @@ class NZBDevice extends Homey.Device {
 
     /*
     |---------------------------------------------------------------------------
-    | Error message
-    |---------------------------------------------------------------------------
-    |
-    | Log an error message to the console, prepended by the device name.
-    |
-    */
-
-    error () {
-        console.log.bind(this, `✕ ${this.getName()}`).apply(this, arguments);
-    }
-
-    /*
-    |---------------------------------------------------------------------------
     | Initiate
     |---------------------------------------------------------------------------
     |
@@ -80,7 +67,7 @@ class NZBDevice extends Homey.Device {
     onDeleted () {
         clearInterval(this._deviceDataTimer);
 
-        this.log(`Device is deleted`);
+        this.log('Device is deleted');
     }
 
     /*
@@ -97,7 +84,7 @@ class NZBDevice extends Homey.Device {
         return this.api.request({ method: 'pausedownload' })
             .then( () => {
                 this.setCapabilityValue('download_enabled', false);
-                this.log(`Paused download queue`);
+                this.log('Paused download queue');
             }).catch( error => {
                 this.error(`pausedownload: ${error}`);
             });
@@ -120,7 +107,7 @@ class NZBDevice extends Homey.Device {
     async reload () {
         return this.api.request({ method: 'reload' })
             .then( () => {
-                this.log(`Reloaded`);
+                this.log('Reloaded');
             }).catch( error => {
                 this.error(`reload: ${error}`);
             });
@@ -131,7 +118,7 @@ class NZBDevice extends Homey.Device {
         return this.api.request({ method: 'resumedownload' })
             .then( () => {
                 this.setCapabilityValue('download_enabled', true);
-                this.log(`Resumed download queue`);
+                this.log('Resumed download queue');
             }).catch( error => {
                 this.error(`resumedownload: ${error}`);
             });
@@ -141,7 +128,7 @@ class NZBDevice extends Homey.Device {
     async scan () {
         return this.api.request({ method: 'scan' })
             .then( () => {
-                this.log(`Scanning incoming directory for nzb-files`);
+                this.log('Scanning incoming directory for nzb-files');
             }).catch( error => {
                 this.error(`scan: ${error}`);
             });
@@ -151,7 +138,7 @@ class NZBDevice extends Homey.Device {
     async shutdown () {
         return this.api.request({ method: 'shutdown' })
             .then( () => {
-                this.log(`Shutdown`);
+                this.log('Shutdown');
             }).catch( error => {
                 this.error(`shutdown: ${error}`);
             });

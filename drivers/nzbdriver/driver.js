@@ -32,10 +32,10 @@ class NZBDriver extends Homey.Driver {
     */
 
     onPair (socket) {
-        console.log(`✓ Pairing started`);
+        this.log('Pairing started');
 
         socket.on('search_devices', async (pairData, callback) => {
-            console.log(`✓ Searching...`);
+            this.log('Searching for devices...');
 
             foundServer = [];
 
@@ -61,13 +61,13 @@ class NZBDriver extends Homey.Driver {
 
                     callback(null, true);
                 }).catch( error => {
-                    console.log(`✕ ${error}`);
+                    this.error(error);
                     callback(error);
                 });
         });
 
         socket.on('list_devices', async (data, callback) => {
-            console.log(`✓ Found: ${foundServer[0].name}`);
+            this.log(`Found: ${foundServer[0].name}`);
             callback(null, foundServer);
         });
     }

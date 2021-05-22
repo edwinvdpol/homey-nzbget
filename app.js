@@ -14,7 +14,7 @@ class NZBApp extends Homey.App {
     */
 
     onInit () {
-        console.log('✓ NZBGet App running');
+        this.log('App running');
     }
 
 };
