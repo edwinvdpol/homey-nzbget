@@ -21,19 +21,6 @@ class NZBDevice extends Homey.Device {
 
     /*
     |---------------------------------------------------------------------------
-    | Success message
-    |---------------------------------------------------------------------------
-    |
-    | Log a success message to the console, prepended by the device name.
-    |
-    */
-
-    success () {
-        console.log.bind(this, `✓ ${this.getName()}`).apply(this, arguments);
-    }
-
-    /*
-    |---------------------------------------------------------------------------
     | Initiate
     |---------------------------------------------------------------------------
     |
@@ -42,7 +29,7 @@ class NZBDevice extends Homey.Device {
     */
 
     onInit () {
-        this.success(`is initiated`);
+        this.log(`Device is initiated`);
 
         // Register capability listeners
         this._registerCapabilityListeners();
@@ -71,7 +58,7 @@ class NZBDevice extends Homey.Device {
 
     onSettings (oldSettings, newSettings, changedKeys, callback) {
         changedKeys.forEach( (name) => {
-            this.success(`setting \`${name}\` set \`${oldSettings[name]}\` => \`${newSettings[name]}\``);
+            this.log(`Device setting \`${name}\` set \`${oldSettings[name]}\` => \`${newSettings[name]}\``);
 
             if (name === 'refresh_interval') {
                 this._setRefreshTimer(newSettings[name]);
@@ -87,14 +74,13 @@ class NZBDevice extends Homey.Device {
     |---------------------------------------------------------------------------
     |
     | This method is called when a device is deleted.
-    | It logs a success message, confirming the deletion of the device.
     |
     */
 
     onDeleted () {
         clearInterval(this._deviceDataTimer);
 
-        this.success(`is deleted`);
+        this.log(`Device is deleted`);
     }
 
     /*
@@ -111,7 +97,7 @@ class NZBDevice extends Homey.Device {
         return this.api.request({ method: 'pausedownload' })
             .then( () => {
                 this.setCapabilityValue('download_enabled', false);
-                this.success(`paused download queue`);
+                this.log(`Paused download queue`);
             }).catch( error => {
                 this.error(`pausedownload: ${error}`);
             });
@@ -124,7 +110,7 @@ class NZBDevice extends Homey.Device {
         return this.api.request({ method: 'rate', params: [rate] })
             .then( () => {
                 this.setCapabilityValue('rate_limit', args.download_rate);
-                this.success(`set download limit to ${args.download_rate} MB/s`);
+                this.log(`Set download limit to ${args.download_rate} MB/s`);
             }).catch( error => {
                 this.error(`rate: ${error}`);
             });
@@ -134,7 +120,7 @@ class NZBDevice extends Homey.Device {
     async reload () {
         return this.api.request({ method: 'reload' })
             .then( () => {
-                this.success(`reloaded`);
+                this.log(`Reloaded`);
             }).catch( error => {
                 this.error(`reload: ${error}`);
             });
@@ -145,7 +131,7 @@ class NZBDevice extends Homey.Device {
         return this.api.request({ method: 'resumedownload' })
             .then( () => {
                 this.setCapabilityValue('download_enabled', true);
-                this.success(`resumed download queue`);
+                this.log(`Resumed download queue`);
             }).catch( error => {
                 this.error(`resumedownload: ${error}`);
             });
@@ -155,7 +141,7 @@ class NZBDevice extends Homey.Device {
     async scan () {
         return this.api.request({ method: 'scan' })
             .then( () => {
-                this.success(`scanning incoming directory for nzb-files`);
+                this.log(`Scanning incoming directory for nzb-files`);
             }).catch( error => {
                 this.error(`scan: ${error}`);
             });
@@ -165,7 +151,7 @@ class NZBDevice extends Homey.Device {
     async shutdown () {
         return this.api.request({ method: 'shutdown' })
             .then( () => {
-                this.success(`shutdown`);
+                this.log(`Shutdown`);
             }).catch( error => {
                 this.error(`shutdown: ${error}`);
             });
@@ -259,7 +245,7 @@ class NZBDevice extends Homey.Device {
             this._updateDevice();
         }, refreshInterval);
 
-        this.success(`refresh interval set to ${seconds} seconds`);
+        this.log(`Refresh interval set to ${seconds} seconds`);
     }
 
     /*
