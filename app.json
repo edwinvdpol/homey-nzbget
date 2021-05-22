@@ -1,350 +1,368 @@
 {
-    "id": "net.nzbget",
-    "version": "1.0.1",
-    "compatibility": ">=2.0.0",
-    "sdk": 2,
-    "brandColor": "#3e8c25",
-    "name": {
-        "en": "NZBGet",
-        "nl": "NZBGet"
-    },
-    "description": {
-        "en": "NZBGet for Homey",
-        "nl": "NZBGet voor Homey"
-    },
-    "category": [ "internet" ],
-    "tags": {
-        "en": [ "nzbget", "usenet", "downloader", "download", "nzb", "tool",  "files" ],
-        "nl": [ "nzbget", "usenet", "downloader", "download", "nzb", "tool", "bestanden" ]
-    },
-    "permissions": [],
-    "images": {
-        "large": "/assets/images/large.png",
-        "small": "/assets/images/small.png"
-    },
-    "author": {
+  "id": "net.nzbget",
+  "version": "1.0.1",
+  "compatibility": ">=2.0.0",
+  "sdk": 2,
+  "brandColor": "#3e8c25",
+  "name": {
+    "en": "NZBGet",
+    "nl": "NZBGet"
+  },
+  "description": {
+    "en": "NZBGet for Homey",
+    "nl": "NZBGet voor Homey"
+  },
+  "category": [
+    "internet"
+  ],
+  "tags": {
+    "en": [
+      "nzbget",
+      "usenet",
+      "downloader",
+      "download",
+      "nzb",
+      "tool",
+      "files"
+    ],
+    "nl": [
+      "nzbget",
+      "usenet",
+      "downloader",
+      "download",
+      "nzb",
+      "tool",
+      "bestanden"
+    ]
+  },
+  "permissions": [],
+  "images": {
+    "large": "/assets/images/large.png",
+    "small": "/assets/images/small.png"
+  },
+  "author": {
+    "name": "Edwin van de Pol",
+    "email": "developer@edwinvandepol.nl"
+  },
+  "contributors": {
+    "developers": [
+      {
         "name": "Edwin van de Pol",
         "email": "developer@edwinvandepol.nl"
-    },
-    "contributors": {
-        "developers": [
-            {
-                "name": "Edwin van de Pol",
-                "email": "developer@edwinvandepol.nl"
-            }
-        ]
-    },
-    "contributing": {
-        "donate": {
-            "paypal": {
-                "username": "edwinvdpol"
-            }
-        }
-    },
-    "flow": {
-        "actions": [
-            {
-                "id": "pausedownload",
-                "title": {
-                    "en": "Pause download queue",
-                    "nl": "Downloadwachtrij pauzeren"
-                },
-                "args": [
-                    {
-                        "type": "device",
-                        "name": "device",
-                        "filter": "driver_id=nzbdriver"
-                    }
-                ]
-            },
-            {
-                "id": "resumedownload",
-                "title": {
-                    "en": "Resume download queue",
-                    "nl": "Downloadwachtrij hervatten"
-                },
-                "args": [
-                    {
-                        "type": "device",
-                        "name": "device",
-                        "filter": "driver_id=nzbdriver"
-                    }
-                ]
-            },
-            {
-                "id": "rate",
-                "title": {
-                    "en": "Set download speed limit",
-                    "nl": "Stel download snelheidslimiet in"
-                },
-                "args": [
-                    {
-                        "type": "device",
-                        "name": "device",
-                        "filter": "driver_id=nzbdriver"
-                    },
-                    {
-                        "type": "number",
-                        "name": "download_rate",
-                        "min": 0,
-                        "step": 1,
-                        "placeholder": {
-                            "en": "In MB/s (0 = off)",
-                            "nl": "In MB/s (0 = uit)"
-                        }
-                    }
-                ]
-            },
-            {
-                "id": "scan",
-                "title": {
-                    "en": "Scan incoming directory for nzb-files",
-                    "nl": "Inkomende map scannen voor nzb-bestanden"
-                },
-                "args": [
-                    {
-                        "type": "device",
-                        "name": "device",
-                        "filter": "driver_id=nzbdriver"
-                    }
-                ]
-            },
-            {
-                "id": "reload",
-                "title": {
-                    "en": "Reload the server",
-                    "nl": "Laad de server opnieuw"
-                },
-                "args": [
-                    {
-                        "type": "device",
-                        "name": "device",
-                        "filter": "driver_id=nzbdriver"
-                    }
-                ]
-            },
-            {
-                "id": "shutdown",
-                "title": {
-                    "en": "Shutdown the server",
-                    "nl": "Sluit de server af"
-                },
-                "args": [
-                    {
-                        "type": "device",
-                        "name": "device",
-                        "filter": "driver_id=nzbdriver"
-                    }
-                ]
-            }
-        ]
-    },
-    "drivers": [
-        {
-            "id": "nzbdriver",
-            "name": {
-                "en": "Server"
-            },
-            "class": "other",
-            "capabilities": [
-                "download_enabled",
-                "remaining_files",
-                "remaining_size",
-                "download_rate",
-                "download_size",
-                "rate_limit",
-                "free_disk_space",
-                "average_rate",
-                "article_cache",
-                "download_time",
-                "uptime"
-            ],
-            "pair": [
-                {
-                    "id": "start"
-                },
-                {
-                    "id": "list_devices",
-                    "template": "list_devices",
-                    "navigation": {
-                        "next": "add_devices"
-                    }
-                },
-                {
-                    "id": "add_devices",
-                    "template": "add_devices"
-                }
-            ],
-            "images": {
-                "large": "/drivers/nzbdriver/assets/images/large.png",
-                "small": "/drivers/nzbdriver/assets/images/small.png"
-            },
-            "settings": [
-                {
-                    "type": "group",
-                    "label": {
-                        "en": "General settings",
-                        "nl": "Algemene instellingen"
-                    },
-                    "children": [
-                        {
-                            "id": "refresh_interval",
-                            "type": "number",
-                            "label": {
-                                "en": "Update interval"
-                            },
-                            "value": 20,
-                            "min": 5,
-                            "max": 1800,
-                            "hint": {
-                                "en": "The refresh interval of the statistics in seconds.",
-                                "nl": "Het vernieuwingsinterval van de statistieken in seconden."
-                            }
-                        }
-                    ]
-                }
-            ]
-        }
-    ],
-    "capabilities": {
-        "article_cache": {
-            "type": "number",
-            "decimals": 2,
-            "title": {
-                "en": "Article cache",
-                "nl": "Artikel cache"
-            },
-            "icon": "/assets/harddisk.svg",
-            "insights": true,
-            "getable": true,
-            "setable": false,
-            "units": {
-                "en": "MB"
-            }
-        },
-        "average_rate": {
-            "type": "number",
-            "decimals": 2,
-            "title": {
-                "en": "Average speed",
-                "nl": "Gemiddelde snelheid"
-            },
-            "icon": "/assets/download-speed.svg",
-            "insights": true,
-            "getable": true,
-            "setable": false,
-            "units": {
-                "en": "MB/s"
-            }
-        },
-        "download_enabled": {
-            "type": "boolean",
-            "title": {
-                "en": "Download enabled",
-                "nl": "Download ingeschakeld"
-            },
-            "getable": true,
-            "setable": true,
-            "uiComponent": "toggle",
-            "uiQuickAction": false
-        },
-        "download_rate": {
-            "type": "number",
-            "decimals": 2,
-            "title": {
-                "en": "Download speed",
-                "nl": "Download snelheid"
-            },
-            "icon": "/assets/download-speed.svg",
-            "insights": true,
-            "getable": true,
-            "setable": false,
-            "units": {
-                "en": "MB/s"
-            }
-        },
-        "download_size": {
-            "type": "number",
-            "decimals": 2,
-            "title": {
-                "en": "Total downloaded",
-                "nl": "Totaal gedownload"
-            },
-            "icon": "/assets/harddisk.svg",
-            "getable": true,
-            "setable": false,
-            "units": {
-                "en": "GB"
-            }
-        },
-         "download_time": {
-            "type": "string",
-            "title": {
-                "en": "Total download time",
-                "nl": "Totale downloadtijd"
-            },
-            "icon": "/assets/clock.svg",
-            "getable": true,
-            "setable": false
-        },
-        "free_disk_space": {
-            "type": "number",
-            "title": {
-                "en": "Free disk space",
-                "nl": "Vrije schijfruimte"
-            },
-            "icon": "/assets/harddisk.svg",
-            "getable": true,
-            "setable": false,
-            "units": {
-                "en": "GB"
-            }
-        },
-        "rate_limit": {
-            "type": "number",
-            "title": {
-                "en": "Download limit",
-                "nl": "Download limiet"
-            },
-            "icon": "/assets/download-speed.svg",
-            "getable": true,
-            "setable": false,
-            "units": {
-                "en": "MB/s"
-            }
-        },
-        "remaining_files": {
-            "type": "number",
-            "title": {
-                "en": "Files in queue",
-                "nl": "Bestanden in wachtrij"
-            },
-            "icon": "/assets/file.svg",
-            "getable": true,
-            "setable": false
-        },
-        "remaining_size": {
-            "type": "number",
-            "decimals": 2,
-            "title": {
-                "en": "Download remaining",
-                "nl": "Nog te downloaden"
-            },
-            "icon": "/assets/harddisk.svg",
-            "getable": true,
-            "setable": false,
-            "units": {
-                "en": "MB"
-            }
-        },
-        "uptime": {
-            "type": "string",
-            "title": {
-                "en": "Server uptime"
-            },
-            "icon": "/assets/clock.svg",
-            "getable": true,
-            "setable": false
-        }
+      }
+    ]
+  },
+  "contributing": {
+    "donate": {
+      "paypal": {
+        "username": "edwinvdpol"
+      }
     }
+  },
+  "flow": {
+    "actions": [
+      {
+        "id": "pausedownload",
+        "title": {
+          "en": "Pause download queue",
+          "nl": "Downloadwachtrij pauzeren"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=nzbdriver"
+          }
+        ]
+      },
+      {
+        "id": "resumedownload",
+        "title": {
+          "en": "Resume download queue",
+          "nl": "Downloadwachtrij hervatten"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=nzbdriver"
+          }
+        ]
+      },
+      {
+        "id": "rate",
+        "title": {
+          "en": "Set download speed limit",
+          "nl": "Stel download snelheidslimiet in"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=nzbdriver"
+          },
+          {
+            "type": "number",
+            "name": "download_rate",
+            "min": 0,
+            "step": 1,
+            "placeholder": {
+              "en": "In MB/s (0 = off)",
+              "nl": "In MB/s (0 = uit)"
+            }
+          }
+        ]
+      },
+      {
+        "id": "scan",
+        "title": {
+          "en": "Scan incoming directory for nzb-files",
+          "nl": "Inkomende map scannen voor nzb-bestanden"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=nzbdriver"
+          }
+        ]
+      },
+      {
+        "id": "reload",
+        "title": {
+          "en": "Reload the server",
+          "nl": "Laad de server opnieuw"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=nzbdriver"
+          }
+        ]
+      },
+      {
+        "id": "shutdown",
+        "title": {
+          "en": "Shutdown the server",
+          "nl": "Sluit de server af"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=nzbdriver"
+          }
+        ]
+      }
+    ]
+  },
+  "drivers": [
+    {
+      "id": "nzbdriver",
+      "name": {
+        "en": "Server"
+      },
+      "class": "other",
+      "capabilities": [
+        "download_enabled",
+        "remaining_files",
+        "remaining_size",
+        "download_rate",
+        "download_size",
+        "rate_limit",
+        "free_disk_space",
+        "average_rate",
+        "article_cache",
+        "download_time",
+        "uptime"
+      ],
+      "pair": [
+        {
+          "id": "start"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "images": {
+        "large": "/drivers/nzbdriver/assets/images/large.png",
+        "small": "/drivers/nzbdriver/assets/images/small.png"
+      },
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "General settings",
+            "nl": "Algemene instellingen"
+          },
+          "children": [
+            {
+              "id": "refresh_interval",
+              "type": "number",
+              "label": {
+                "en": "Update interval"
+              },
+              "value": 20,
+              "min": 5,
+              "max": 1800,
+              "hint": {
+                "en": "The refresh interval of the statistics in seconds.",
+                "nl": "Het vernieuwingsinterval van de statistieken in seconden."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "capabilities": {
+    "article_cache": {
+      "type": "number",
+      "decimals": 2,
+      "title": {
+        "en": "Article cache",
+        "nl": "Artikel cache"
+      },
+      "icon": "/assets/harddisk.svg",
+      "insights": true,
+      "getable": true,
+      "setable": false,
+      "units": {
+        "en": "MB"
+      }
+    },
+    "average_rate": {
+      "type": "number",
+      "decimals": 2,
+      "title": {
+        "en": "Average speed",
+        "nl": "Gemiddelde snelheid"
+      },
+      "icon": "/assets/download-speed.svg",
+      "insights": true,
+      "getable": true,
+      "setable": false,
+      "units": {
+        "en": "MB/s"
+      }
+    },
+    "download_enabled": {
+      "type": "boolean",
+      "title": {
+        "en": "Download enabled",
+        "nl": "Download ingeschakeld"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "toggle",
+      "uiQuickAction": false
+    },
+    "download_rate": {
+      "type": "number",
+      "decimals": 2,
+      "title": {
+        "en": "Download speed",
+        "nl": "Download snelheid"
+      },
+      "icon": "/assets/download-speed.svg",
+      "insights": true,
+      "getable": true,
+      "setable": false,
+      "units": {
+        "en": "MB/s"
+      }
+    },
+    "download_size": {
+      "type": "number",
+      "decimals": 2,
+      "title": {
+        "en": "Total downloaded",
+        "nl": "Totaal gedownload"
+      },
+      "icon": "/assets/harddisk.svg",
+      "getable": true,
+      "setable": false,
+      "units": {
+        "en": "GB"
+      }
+    },
+    "download_time": {
+      "type": "string",
+      "title": {
+        "en": "Total download time",
+        "nl": "Totale downloadtijd"
+      },
+      "icon": "/assets/clock.svg",
+      "getable": true,
+      "setable": false
+    },
+    "free_disk_space": {
+      "type": "number",
+      "title": {
+        "en": "Free disk space",
+        "nl": "Vrije schijfruimte"
+      },
+      "icon": "/assets/harddisk.svg",
+      "getable": true,
+      "setable": false,
+      "units": {
+        "en": "GB"
+      }
+    },
+    "rate_limit": {
+      "type": "number",
+      "title": {
+        "en": "Download limit",
+        "nl": "Download limiet"
+      },
+      "icon": "/assets/download-speed.svg",
+      "getable": true,
+      "setable": false,
+      "units": {
+        "en": "MB/s"
+      }
+    },
+    "remaining_files": {
+      "type": "number",
+      "title": {
+        "en": "Files in queue",
+        "nl": "Bestanden in wachtrij"
+      },
+      "icon": "/assets/file.svg",
+      "getable": true,
+      "setable": false
+    },
+    "remaining_size": {
+      "type": "number",
+      "decimals": 2,
+      "title": {
+        "en": "Download remaining",
+        "nl": "Nog te downloaden"
+      },
+      "icon": "/assets/harddisk.svg",
+      "getable": true,
+      "setable": false,
+      "units": {
+        "en": "MB"
+      }
+    },
+    "uptime": {
+      "type": "string",
+      "title": {
+        "en": "Server uptime"
+      },
+      "icon": "/assets/clock.svg",
+      "getable": true,
+      "setable": false
+    }
+  }
 }

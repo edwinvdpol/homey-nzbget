@@ -1,13 +1,13 @@
 {
-    "error": {
-        "access": "De toegang is geweigerd",
-        "connection": "Kon geen verbinding met apparaat maken",
-        "internal": "Er is een interne serverfout opgetreden",
-        "login": "Gebruikersnaam of wachtwoord is ongeldig",
-        "unknown": "Er is een onbekende fout opgetreden"
-    },
-    "login": "Inloggen",
-    "password": "Wachtwoord",
-    "port": "Poort",
-    "username": "Gebruikersnaam"
+  "error": {
+    "access": "De toegang is geweigerd",
+    "connection": "Kon geen verbinding met apparaat maken",
+    "internal": "Er is een interne serverfout opgetreden",
+    "login": "Gebruikersnaam of wachtwoord is ongeldig",
+    "unknown": "Er is een onbekende fout opgetreden"
+  },
+  "login": "Inloggen",
+  "password": "Wachtwoord",
+  "port": "Poort",
+  "username": "Gebruikersnaam"
 }
