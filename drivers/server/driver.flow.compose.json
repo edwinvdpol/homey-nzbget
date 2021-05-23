@@ -1,0 +1,22 @@
+{
+  "actions": [
+    {
+      "$extends": "pausedownload"
+    },
+    {
+      "$extends": "resumedownload"
+    },
+    {
+      "$extends": "rate"
+    },
+    {
+      "$extends": "scan"
+    },
+    {
+      "$extends": "reload"
+    },
+    {
+      "$extends": "shutdown"
+    }
+  ]
+}

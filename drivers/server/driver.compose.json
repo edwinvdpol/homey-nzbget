@@ -1,0 +1,66 @@
+{
+  "id": "server",
+  "name": {
+    "en": "Server"
+  },
+  "class": "other",
+  "capabilities": [
+    "download_enabled",
+    "remaining_files",
+    "remaining_size",
+    "download_rate",
+    "download_size",
+    "rate_limit",
+    "free_disk_space",
+    "average_rate",
+    "article_cache",
+    "download_time",
+    "uptime"
+  ],
+  "pair": [
+    {
+      "id": "start"
+    },
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "navigation": {
+        "next": "add_devices"
+      }
+    },
+    {
+      "id": "add_devices",
+      "template": "add_devices"
+    }
+  ],
+  "images": {
+    "large": "/drivers/nzbdriver/assets/images/large.png",
+    "small": "/drivers/nzbdriver/assets/images/small.png"
+  },
+  "settings": [
+    {
+      "type": "group",
+      "label": {
+        "en": "General settings",
+        "nl": "Algemene instellingen"
+      },
+      "children": [
+        {
+          "id": "refresh_interval",
+          "type": "number",
+          "label": {
+            "en": "Refresh interval",
+            "nl": "Vernieuwingsinterval"
+          },
+          "value": 20,
+          "min": 5,
+          "max": 1800,
+          "hint": {
+            "en": "The refresh interval of the statistics in seconds.",
+            "nl": "Het vernieuwingsinterval van de statistieken in seconden."
+          }
+        }
+      ]
+    }
+  ]
+}

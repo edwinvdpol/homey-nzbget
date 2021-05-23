@@ -1,0 +1,10 @@
+{
+  "type": "string",
+  "title": {
+    "en": "Total download time",
+    "nl": "Totale downloadtijd"
+  },
+  "icon": "/assets/clock.svg",
+  "getable": true,
+  "setable": false
+}

@@ -1,0 +1,13 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Download limit",
+    "nl": "Download limiet"
+  },
+  "icon": "/assets/download-speed.svg",
+  "getable": true,
+  "setable": false,
+  "units": {
+    "en": "MB/s"
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "id": "net.nzbget",
+  "version": "1.0.1",
+  "compatibility": ">=2.0.0",
+  "sdk": 2,
+  "brandColor": "#3e8c25",
+  "name": {
+    "en": "NZBGet"
+  },
+  "description": {
+    "en": "NZBGet for Homey",
+    "nl": "NZBGet voor Homey"
+  },
+  "category": [
+    "internet"
+  ],
+  "tags": {
+    "en": [
+      "nzbget",
+      "usenet",
+      "downloader",
+      "download",
+      "nzb",
+      "tool",
+      "files"
+    ],
+    "nl": [
+      "nzbget",
+      "usenet",
+      "downloader",
+      "download",
+      "nzb",
+      "tool",
+      "bestanden"
+    ]
+  },
+  "permissions": [],
+  "images": {
+    "large": "/assets/images/large.png",
+    "small": "/assets/images/small.png"
+  },
+  "author": {
+    "name": "Edwin van de Pol",
+    "email": "developer@edwinvandepol.nl"
+  },
+  "contributors": {
+    "developers": [
+      {
+        "name": "Edwin van de Pol",
+        "email": "developer@edwinvandepol.nl"
+      }
+    ]
+  },
+  "contributing": {
+    "donate": {
+      "paypal": {
+        "username": "edwinvdpol"
+      }
+    }
+  }
+}

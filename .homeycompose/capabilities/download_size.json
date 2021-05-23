@@ -1,0 +1,14 @@
+{
+  "type": "number",
+  "decimals": 2,
+  "title": {
+    "en": "Total downloaded",
+    "nl": "Totaal gedownload"
+  },
+  "icon": "/assets/harddisk.svg",
+  "getable": true,
+  "setable": false,
+  "units": {
+    "en": "GB"
+  }
+}

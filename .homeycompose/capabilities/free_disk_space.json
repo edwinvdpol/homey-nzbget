@@ -1,0 +1,13 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Free disk space",
+    "nl": "Vrije schijfruimte"
+  },
+  "icon": "/assets/harddisk.svg",
+  "getable": true,
+  "setable": false,
+  "units": {
+    "en": "GB"
+  }
+}

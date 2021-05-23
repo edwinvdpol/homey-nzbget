@@ -1,0 +1,10 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Files in queue",
+    "nl": "Bestanden in wachtrij"
+  },
+  "icon": "/assets/file.svg",
+  "getable": true,
+  "setable": false
+}
