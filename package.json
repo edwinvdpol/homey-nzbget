@@ -1,0 +1,24 @@
+{
+  "name": "net.nzbget",
+  "version": "1.0.1",
+  "homepage": "https://github.com/edwinvdpol/net.nzbget#readme",
+  "license": "SEE LICENSE",
+  "author": {
+    "name": "Edwin van de Pol",
+    "email": "developer@edwinvandepol.nl"
+  },
+  "funding": [
+    {
+      "type": "individual",
+      "url": "https://www.paypal.me/edwinvdpol"
+    }
+  ],
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/edwinvdpol/net.nzbget.git"
+  },
+  "devDependencies": {
+    "@types/homey": "npm:homey-apps-sdk-v3-types@^0.1.0"
+  }
+}
