@@ -1,7 +1,6 @@
 'use strict';
 
 const Homey = require('homey');
-
 const Api = require('/lib/Api.js');
 
 let foundServer = [];
@@ -34,36 +33,27 @@ class NZBDriver extends Homey.Driver {
   onPair(socket) {
     this.log('Pairing started');
 
-    socket.on('search_devices', async (pairData, callback) => {
+    socket.on('search_devices', async (data, callback) => {
       this.log('Searching for devices...');
 
       foundServer = [];
 
-      const api = new Api(pairData);
+      try {
+        const version = await new Api(data).version();
 
-      api.request({method: 'version'})
-        .then(result => {
-          const version = parseInt(result.result);
+        if (version < minimalVersion) {
+          callback(new Error(`Version ${version} is not supported`));
+        }
 
-          if (version < minimalVersion) {
-            throw new Error(`Version ${result.result} is not supported.`);
-          }
+        foundServer.push({
+          name: `NZBGet v${version}`,
+          data: data
+        });
 
-          foundServer.push({
-            name: `NZBGet v${result.result}`,
-            data: {
-              url: pairData.url,
-              port: pairData.port,
-              user: pairData.user,
-              pass: pairData.pass
-            }
-          });
-
-          callback(null, true);
-        }).catch(error => {
-        this.error(error);
-        callback(error);
-      });
+        callback(null, true);
+      } catch (err) {
+        callback(err);
+      }
     });
 
     socket.on('list_devices', async (data, callback) => {

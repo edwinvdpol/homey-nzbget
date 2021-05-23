@@ -14,22 +14,22 @@
         <div class="logo"></div>
 
         <div class="row">
-            <label for="pair-url">URL</label>
-            <input id="pair-url" placeholder="http://127.0.0.1" type="text" value="" />
+            <label for="pair-host">URL</label>
+            <input id="pair-host" placeholder="http://127.0.0.1" type="text" value="" />
         </div>
 
         <div class="row">
-            <label for="pair-port" data-i18n="port">Port</label>
+            <label for="pair-port" data-i18n="port"></label>
             <input id="pair-port" placeholder="6789" type="text" value="" />
         </div>
 
         <div class="row">
-            <label for="pair-user" data-i18n="username">Username</label>
+            <label for="pair-user" data-i18n="username"></label>
             <input id="pair-user" placeholder="nzbget" type="text" value="" />
         </div>
 
         <div class="row">
-            <label for="pair-pass" data-i18n="password">Password</label>
+            <label for="pair-pass" data-i18n="password"></label>
             <input id="pair-pass" placeholder="tegbzn6789" type="password" value="" />
         </div>
 
@@ -48,7 +48,7 @@
         pBtn.disabled = true;
 
         let data = {
-            url: document.getElementById('pair-url').value,
+            host: document.getElementById('pair-host').value,
             port: document.getElementById('pair-port').value,
             user: document.getElementById('pair-user').value,
             pass: document.getElementById('pair-pass').value

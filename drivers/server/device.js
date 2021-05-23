@@ -1,7 +1,6 @@
 'use strict';
 
 const Homey = require('homey');
-
 const Api = require('/lib/Api.js');
 
 class NZBDevice extends Homey.Device {
@@ -16,7 +15,7 @@ class NZBDevice extends Homey.Device {
   */
 
   onInit() {
-    this.log(`Device is initiated`);
+    this.log('Device is initiated');
 
     // Register capability listeners
     this._registerCapabilityListeners();
@@ -81,7 +80,7 @@ class NZBDevice extends Homey.Device {
 
   // Pause download queue
   async pausedownload() {
-    return this.api.request({method: 'pausedownload'})
+    return this.api.pausedownload()
       .then(() => {
         this.setCapabilityValue('download_enabled', false);
         this.log('Paused download queue');
@@ -92,9 +91,7 @@ class NZBDevice extends Homey.Device {
 
   // Set download speed limit
   async rate(args) {
-    let rate = Number(args.download_rate * 1000);
-
-    return this.api.request({method: 'rate', params: [rate]})
+    return this.api.rate(args.download_rate)
       .then(() => {
         this.setCapabilityValue('rate_limit', args.download_rate);
         this.log(`Set download limit to ${args.download_rate} MB/s`);
@@ -105,7 +102,7 @@ class NZBDevice extends Homey.Device {
 
   // Reload server
   async reload() {
-    return this.api.request({method: 'reload'})
+    return this.api.reload()
       .then(() => {
         this.log('Reloaded');
       }).catch(error => {
@@ -115,7 +112,7 @@ class NZBDevice extends Homey.Device {
 
   // Resume download queue
   async resumedownload() {
-    return this.api.request({method: 'resumedownload'})
+    return this.api.resumedownload()
       .then(() => {
         this.setCapabilityValue('download_enabled', true);
         this.log('Resumed download queue');
@@ -126,7 +123,7 @@ class NZBDevice extends Homey.Device {
 
   // Scan incoming directory for nzb-files
   async scan() {
-    return this.api.request({method: 'scan'})
+    return this.api.scan()
       .then(() => {
         this.log('Scanning incoming directory for nzb-files');
       }).catch(error => {
@@ -136,7 +133,7 @@ class NZBDevice extends Homey.Device {
 
   // Shutdown server
   async shutdown() {
-    return this.api.request({method: 'shutdown'})
+    return this.api.shutdown()
       .then(() => {
         this.log('Shutdown');
       }).catch(error => {
@@ -154,36 +151,34 @@ class NZBDevice extends Homey.Device {
   */
 
   _updateDevice() {
-    this.api.request({method: 'status'})
+    this.api.status()
       .then(result => {
         this.setAvailable();
 
-        const data = result.result;
-
         // Convert data
-        const average_rate = parseFloat(data.AverageDownloadRate / 1024000);
-        const download_enabled = (data.DownloadPaused ? false : true);
-        const download_rate = parseFloat(data.DownloadRate / 1024000);
-        const download_size = parseFloat(data.DownloadedSizeMB / 1024);
-        const free_disk_space = Math.floor(data.FreeDiskSpaceMB / 1024);
-        const rate_limit = Number(data.DownloadLimit / 1024000);
+        const average_rate = parseFloat(result.AverageDownloadRate / 1024000);
+        const download_enabled = (!result.DownloadPaused);
+        const download_rate = parseFloat(result.DownloadRate / 1024000);
+        const download_size = parseFloat(result.DownloadedSizeMB / 1024);
+        const free_disk_space = Math.floor(result.FreeDiskSpaceMB / 1024);
+        const rate_limit = Number(result.DownloadLimit / 1024000);
 
         // Capability values
-        this.setCapabilityValue('article_cache', parseFloat(data.ArticleCacheMB));
+        this.setCapabilityValue('article_cache', parseFloat(result.ArticleCacheMB));
         this.setCapabilityValue('average_rate', average_rate);
         this.setCapabilityValue('download_enabled', download_enabled);
         this.setCapabilityValue('download_rate', download_rate);
         this.setCapabilityValue('download_size', download_size);
-        this.setCapabilityValue('download_time', this._toTime(Number(data.DownloadTimeSec)));
+        this.setCapabilityValue('download_time', this._toTime(Number(result.DownloadTimeSec)));
         this.setCapabilityValue('free_disk_space', free_disk_space);
         this.setCapabilityValue('rate_limit', rate_limit);
-        this.setCapabilityValue('remaining_size', Number(data.RemainingSizeMB));
-        this.setCapabilityValue('uptime', this._toTime(data.UpTimeSec));
+        this.setCapabilityValue('remaining_size', Number(result.RemainingSizeMB));
+        this.setCapabilityValue('uptime', this._toTime(result.UpTimeSec));
 
       }).then(() => {
-      this.api.request({method: 'listfiles'})
+      this.api.listfiles()
         .then(result => {
-          const remaining_files = Object.keys(result.result).length;
+          const remaining_files = Object.keys(result).length;
           this.setCapabilityValue('remaining_files', remaining_files);
         });
 
@@ -206,9 +201,9 @@ class NZBDevice extends Homey.Device {
     this.registerCapabilityListener('download_enabled', (value) => {
       if (value) {
         return this.resumedownload();
-      } else {
-        return this.pausedownload();
       }
+
+      return this.pausedownload();
     });
   }
 

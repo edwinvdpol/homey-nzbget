@@ -1,10 +1,10 @@
 {
-  "error": {
-    "access": "Access has been denied",
-    "connection": "Could not connect to device",
-    "internal": "An internal server error occurred",
-    "login": "Username or password is invalid",
-    "unknown": "An unknown error occured"
+  "api": {
+    "connection": "Could not connect to server",
+    "error": "A server error occurred",
+    "forbidden": "Access has been denied",
+    "response": "Invalid response received",
+    "unauthorized": "Username or password is invalid"
   },
   "login": "Login",
   "password": "Password",
