@@ -39,11 +39,11 @@ class NZBDriver extends Homey.Driver {
 
       foundServer = [];
 
-      var api = new Api(pairData);
+      const api = new Api(pairData);
 
       api.request({method: 'version'})
         .then(result => {
-          var version = parseInt(result.result);
+          const version = parseInt(result.result);
 
           if (version < minimalVersion) {
             throw new Error(`Version ${result.result} is not supported.`);

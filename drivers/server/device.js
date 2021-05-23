@@ -158,15 +158,15 @@ class NZBDevice extends Homey.Device {
       .then(result => {
         this.setAvailable();
 
-        var data = result.result;
+        const data = result.result;
 
         // Convert data
-        var average_rate = parseFloat(data.AverageDownloadRate / 1024000);
-        var download_enabled = (data.DownloadPaused ? false : true);
-        var download_rate = parseFloat(data.DownloadRate / 1024000);
-        var download_size = parseFloat(data.DownloadedSizeMB / 1024);
-        var free_disk_space = Math.floor(data.FreeDiskSpaceMB / 1024);
-        var rate_limit = Number(data.DownloadLimit / 1024000);
+        const average_rate = parseFloat(data.AverageDownloadRate / 1024000);
+        const download_enabled = (data.DownloadPaused ? false : true);
+        const download_rate = parseFloat(data.DownloadRate / 1024000);
+        const download_size = parseFloat(data.DownloadedSizeMB / 1024);
+        const free_disk_space = Math.floor(data.FreeDiskSpaceMB / 1024);
+        const rate_limit = Number(data.DownloadLimit / 1024000);
 
         // Capability values
         this.setCapabilityValue('article_cache', parseFloat(data.ArticleCacheMB));
@@ -183,7 +183,7 @@ class NZBDevice extends Homey.Device {
       }).then(() => {
       this.api.request({method: 'listfiles'})
         .then(result => {
-          var remaining_files = Object.keys(result.result).length;
+          const remaining_files = Object.keys(result.result).length;
           this.setCapabilityValue('remaining_files', remaining_files);
         });
 
@@ -226,7 +226,7 @@ class NZBDevice extends Homey.Device {
       clearInterval(this._deviceDataTimer);
     }
 
-    var refreshInterval = seconds * 1000;
+    const refreshInterval = seconds * 1000;
 
     this._deviceDataTimer = setInterval(() => {
       this._updateDevice();
@@ -245,10 +245,10 @@ class NZBDevice extends Homey.Device {
   */
 
   _toTime(sec) {
-    var sec_num = parseInt(sec, 10);
-    var hours = Math.floor(sec_num / 3600);
-    var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
-    var seconds = sec_num - (hours * 3600) - (minutes * 60);
+    const sec_num = parseInt(sec, 10);
+    let hours = Math.floor(sec_num / 3600);
+    let minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+    let seconds = sec_num - (hours * 3600) - (minutes * 60);
 
     if (hours < 10) {
       hours = "0" + hours;
