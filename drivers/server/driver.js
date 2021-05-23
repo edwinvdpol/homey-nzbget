@@ -17,8 +17,8 @@ class NZBDriver extends Homey.Driver {
   |
   */
 
-  onInit() {
-    this._addFlowCardActions();
+  async onInit() {
+    await this._addFlowCardActions();
   }
 
   /*
@@ -72,43 +72,35 @@ class NZBDriver extends Homey.Driver {
   */
 
   async _addFlowCardActions() {
-
     // Pause download queue
-    new Homey.FlowCardAction('pausedownload').register()
-      .registerRunListener(async (args) => {
-        return args.device.pausedownload();
-      });
+    new Homey.FlowCardAction('pausedownload').register().registerRunListener(async (args) => {
+      return args.device.pausedownload();
+    });
 
     // Set download speed limit
-    new Homey.FlowCardAction('rate').register()
-      .registerRunListener(async (args) => {
+    new Homey.FlowCardAction('rate').register().registerRunListener(async (args) => {
         return args.device.rate(args);
-      })
-      .getArgument('download_rate');
+    }).getArgument('download_rate');
 
     // Reload server
-    new Homey.FlowCardAction('reload').register()
-      .registerRunListener(async (args) => {
-        return args.device.reload();
-      });
+    new Homey.FlowCardAction('reload').register().registerRunListener(async (args) => {
+      return args.device.reload();
+    });
 
     // Resume download queue
-    new Homey.FlowCardAction('resumedownload').register()
-      .registerRunListener(async (args) => {
-        return args.device.resumedownload();
-      });
+    new Homey.FlowCardAction('resumedownload').register().registerRunListener(async (args) => {
+      return args.device.resumedownload();
+    });
 
     // Scan incoming directory for nzb-files
-    new Homey.FlowCardAction('scan').register()
-      .registerRunListener(async (args) => {
-        return args.device.scan();
-      });
+    new Homey.FlowCardAction('scan').register().registerRunListener(async (args) => {
+      return args.device.scan();
+    });
 
     // Shutdown server
-    new Homey.FlowCardAction('shutdown').register()
-      .registerRunListener(async (args) => {
-        return args.device.shutdown();
-      });
+    new Homey.FlowCardAction('shutdown').register().registerRunListener(async (args) => {
+      return args.device.shutdown();
+    });
   }
 
 }

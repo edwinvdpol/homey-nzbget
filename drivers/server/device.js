@@ -14,20 +14,24 @@ class NZBDevice extends Homey.Device {
   |
   */
 
-  onInit() {
-    this.log('Device is initiated');
+  async onInit() {
+    try {
+      this.log('Device is initiated');
 
-    // Register capability listeners
-    this._registerCapabilityListeners();
+      // Register capability listeners
+      this._registerCapabilityListeners();
 
-    // Create API object
-    this.api = new Api(this.getData());
+      // Create API object
+      this.api = new Api(this.getData());
 
-    // Update device statistics on startup
-    this._updateDevice();
+      // Update device statistics on startup
+      await this._updateDevice();
 
-    // Enable refresh timer
-    this._setRefreshTimer(this.getSetting('refresh_interval'));
+      // Refresh timer
+      this._setRefreshTimer(this.getSetting('refresh_interval'));
+    } catch (err) {
+      await this.setUnavailable(err.message);
+    }
   }
 
   /*
@@ -44,7 +48,7 @@ class NZBDevice extends Homey.Device {
 
   onSettings(oldSettings, newSettings, changedKeys, callback) {
     changedKeys.forEach((name) => {
-      this.log(`Device setting \`${name}\` set \`${oldSettings[name]}\` => \`${newSettings[name]}\``);
+      this.log(`Setting \`${name}\` set \`${oldSettings[name]}\` => \`${newSettings[name]}\``);
 
       if (name === 'refresh_interval') {
         this._setRefreshTimer(newSettings[name]);
@@ -64,7 +68,7 @@ class NZBDevice extends Homey.Device {
   */
 
   onDeleted() {
-    clearInterval(this._deviceDataTimer);
+    clearInterval(this._refreshTimer);
 
     this.log('Device is deleted');
   }
@@ -80,65 +84,47 @@ class NZBDevice extends Homey.Device {
 
   // Pause download queue
   async pausedownload() {
-    return this.api.pausedownload()
-      .then(() => {
-        this.setCapabilityValue('download_enabled', false);
-        this.log('Paused download queue');
-      }).catch(error => {
-        this.error(`pausedownload: ${error}`);
-      });
+    this.log('Pause download queue');
+
+    await this.api.pausedownload();
+    await this.setCapabilityValue('download_enabled', false);
   }
 
   // Set download speed limit
   async rate(args) {
-    return this.api.rate(args.download_rate)
-      .then(() => {
-        this.setCapabilityValue('rate_limit', args.download_rate);
-        this.log(`Set download limit to ${args.download_rate} MB/s`);
-      }).catch(error => {
-        this.error(`rate: ${error}`);
-      });
+    this.log(`Set download limit to ${args.download_rate} MB/s`);
+
+    await this.api.rate(args.download_rate);
+    await this.setCapabilityValue('rate_limit', args.download_rate);
   }
 
   // Reload server
   async reload() {
-    return this.api.reload()
-      .then(() => {
-        this.log('Reloaded');
-      }).catch(error => {
-        this.error(`reload: ${error}`);
-      });
+    this.log('Reload');
+
+    await this.api.reload();
   }
 
   // Resume download queue
   async resumedownload() {
-    return this.api.resumedownload()
-      .then(() => {
-        this.setCapabilityValue('download_enabled', true);
-        this.log('Resumed download queue');
-      }).catch(error => {
-        this.error(`resumedownload: ${error}`);
-      });
+    this.log('Resume download queue');
+
+    await this.api.resumedownload();
+    await this.setCapabilityValue('download_enabled', true);
   }
 
   // Scan incoming directory for nzb-files
   async scan() {
-    return this.api.scan()
-      .then(() => {
-        this.log('Scanning incoming directory for nzb-files');
-      }).catch(error => {
-        this.error(`scan: ${error}`);
-      });
+    this.log('Scan incoming directory for nzb-files');
+
+    await this.api.scan();
   }
 
   // Shutdown server
   async shutdown() {
-    return this.api.shutdown()
-      .then(() => {
-        this.log('Shutdown');
-      }).catch(error => {
-        this.error(`shutdown: ${error}`);
-      });
+    this.log('Shutdown');
+
+    await this.api.shutdown();
   }
 
   /*
@@ -150,42 +136,40 @@ class NZBDevice extends Homey.Device {
   |
   */
 
-  _updateDevice() {
-    this.api.status()
-      .then(result => {
-        this.setAvailable();
+  async _updateDevice() {
+    try {
+      const status = await this.api.status();
 
-        // Convert data
-        const average_rate = parseFloat(result.AverageDownloadRate / 1024000);
-        const download_enabled = (!result.DownloadPaused);
-        const download_rate = parseFloat(result.DownloadRate / 1024000);
-        const download_size = parseFloat(result.DownloadedSizeMB / 1024);
-        const free_disk_space = Math.floor(result.FreeDiskSpaceMB / 1024);
-        const rate_limit = Number(result.DownloadLimit / 1024000);
+      // Convert data
+      const average_rate = parseFloat(status.AverageDownloadRate / 1024000);
+      const download_enabled = (!status.DownloadPaused);
+      const download_rate = parseFloat(status.DownloadRate / 1024000);
+      const download_size = parseFloat(status.DownloadedSizeMB / 1024);
+      const free_disk_space = Math.floor(status.FreeDiskSpaceMB / 1024);
+      const rate_limit = Number(status.DownloadLimit / 1024000);
 
-        // Capability values
-        this.setCapabilityValue('article_cache', parseFloat(result.ArticleCacheMB));
-        this.setCapabilityValue('average_rate', average_rate);
-        this.setCapabilityValue('download_enabled', download_enabled);
-        this.setCapabilityValue('download_rate', download_rate);
-        this.setCapabilityValue('download_size', download_size);
-        this.setCapabilityValue('download_time', this._toTime(Number(result.DownloadTimeSec)));
-        this.setCapabilityValue('free_disk_space', free_disk_space);
-        this.setCapabilityValue('rate_limit', rate_limit);
-        this.setCapabilityValue('remaining_size', Number(result.RemainingSizeMB));
-        this.setCapabilityValue('uptime', this._toTime(result.UpTimeSec));
+      // Capability values
+      await this.setCapabilityValue('article_cache', parseFloat(status.ArticleCacheMB));
+      await this.setCapabilityValue('average_rate', average_rate);
+      await this.setCapabilityValue('download_enabled', download_enabled);
+      await this.setCapabilityValue('download_rate', download_rate);
+      await this.setCapabilityValue('download_size', download_size);
+      await this.setCapabilityValue('download_time', this._toTime(Number(status.DownloadTimeSec)));
+      await this.setCapabilityValue('free_disk_space', free_disk_space);
+      await this.setCapabilityValue('rate_limit', rate_limit);
+      await this.setCapabilityValue('remaining_size', Number(status.RemainingSizeMB));
+      await this.setCapabilityValue('uptime', this._toTime(status.UpTimeSec));
 
-      }).then(() => {
-      this.api.listfiles()
-        .then(result => {
-          const remaining_files = Object.keys(result).length;
-          this.setCapabilityValue('remaining_files', remaining_files);
-        });
+      const files = await this.api.listfiles();
 
-    }).catch(error => {
-      this.error(error);
-      this.setUnavailable(error);
-    });
+      await this.setCapabilityValue('remaining_files', Object.keys(files).length);
+
+      if (!this.getAvailable()) {
+        await this.setAvailable();
+      }
+    } catch (err) {
+      await this.setUnavailable(err.message);
+    }
   }
 
   /*
@@ -198,8 +182,8 @@ class NZBDevice extends Homey.Device {
   */
 
   _registerCapabilityListeners() {
-    this.registerCapabilityListener('download_enabled', (value) => {
-      if (value) {
+    this.registerCapabilityListener('download_enabled', enabled => {
+      if (enabled) {
         return this.resumedownload();
       }
 
@@ -209,22 +193,30 @@ class NZBDevice extends Homey.Device {
 
   /*
   |---------------------------------------------------------------------------
-  | Set the refresh interval timer
+  | Refresh interval timer
   |---------------------------------------------------------------------------
   |
   | This method sets the refresh interval in seconds.
   |
   */
 
-  _setRefreshTimer(seconds) {
-    if (this._deviceDataTimer) {
-      clearInterval(this._deviceDataTimer);
+  _setRefreshTimer(seconds = 0) {
+    if (this._refreshTimer) {
+      clearInterval(this._refreshTimer);
+
+      this._refreshTimer = null;
+    }
+
+    if (seconds === 0) {
+      this.log('Refresh timer stopped');
+
+      return;
     }
 
     const refreshInterval = seconds * 1000;
 
-    this._deviceDataTimer = setInterval(() => {
-      this._updateDevice();
+    this._refreshTimer = setInterval(async () => {
+      await this._updateDevice();
     }, refreshInterval);
 
     this.log(`Refresh interval set to ${seconds} seconds`);

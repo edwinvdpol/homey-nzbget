@@ -13,8 +13,8 @@ class NZBApp extends Homey.App {
   |
   */
 
-  onInit() {
-    this.log('App running');
+  async onInit() {
+    this.log('Running');
   }
 
 }
