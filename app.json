@@ -237,6 +237,10 @@
           "en": "Set download speed limit",
           "nl": "Stel download snelheidslimiet in"
         },
+        "titleFormatted": {
+          "en": "Set download speed limit to [[download_rate]] MB/s",
+          "nl": "Stel download snelheidslimiet in van [[download_rate]] MB/s"
+        },
         "args": [
           {
             "type": "device",
