@@ -348,7 +348,7 @@
     "uptime": {
       "type": "string",
       "title": {
-        "en": "Server uptime"
+        "en": "Uptime"
       },
       "icon": "/assets/clock.svg",
       "getable": true,
