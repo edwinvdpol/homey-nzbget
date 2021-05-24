@@ -5,82 +5,44 @@ const Api = require('/lib/Api.js');
 
 class NZBDevice extends Homey.Device {
 
-  /*
-  |---------------------------------------------------------------------------
-  | Initiate
-  |---------------------------------------------------------------------------
-  |
-  | This method is called when a device is initiated.
-  |
-  */
-
+  // Initialized
   async onInit() {
     try {
       this.log('Device is initiated');
 
       // Register capability listeners
-      this._registerCapabilityListeners();
+      this.registerCapabilityListeners();
 
       // Create API object
       this.api = new Api(this.getData());
 
       // Update device statistics on startup
-      await this._updateDevice();
+      await this.updateDevice();
 
       // Refresh timer
-      this._setRefreshTimer(this.getSetting('refresh_interval'));
+      this.setRefreshTimer(this.getSetting('refresh_interval'));
     } catch (err) {
       await this.setUnavailable(err.message);
     }
   }
 
-  /*
-  |---------------------------------------------------------------------------
-  | Settings changed
-  |---------------------------------------------------------------------------
-  |
-  | This method is called when the device settings are changed.
-  | It logs all the changed keys, including the old- and new value.
-  |
-  | When the update interval has been changed, it will update the timer.
-  |
-  */
-
-  onSettings(oldSettings, newSettings, changedKeys, callback) {
-    changedKeys.forEach((name) => {
+  // Settings changed
+  async onSettings({oldSettings, newSettings, changedKeys}) {
+    changedKeys.forEach(name => {
       this.log(`Setting \`${name}\` set \`${oldSettings[name]}\` => \`${newSettings[name]}\``);
 
       if (name === 'refresh_interval') {
-        this._setRefreshTimer(newSettings[name]);
+        this.setRefreshTimer(newSettings[name]);
       }
     });
-
-    callback(null, null);
   }
 
-  /*
-  |---------------------------------------------------------------------------
-  | Deleted
-  |---------------------------------------------------------------------------
-  |
-  | This method is called when a device is deleted.
-  |
-  */
-
+  // Deleted
   onDeleted() {
     this.homey.clearInterval(this._refreshTimer);
 
     this.log('Device is deleted');
   }
-
-  /*
-  |---------------------------------------------------------------------------
-  | API functions
-  |---------------------------------------------------------------------------
-  |
-  | These functions are supported by the device.
-  |
-  */
 
   // Pause download queue
   async pausedownload() {
@@ -127,16 +89,8 @@ class NZBDevice extends Homey.Device {
     await this.api.shutdown();
   }
 
-  /*
-  |---------------------------------------------------------------------------
-  | Update device
-  |---------------------------------------------------------------------------
-  |
-  | This method is periodically called to update the device.
-  |
-  */
-
-  async _updateDevice() {
+  // Update device
+  async updateDevice() {
     try {
       const status = await this.api.status();
 
@@ -172,16 +126,8 @@ class NZBDevice extends Homey.Device {
     }
   }
 
-  /*
-  |---------------------------------------------------------------------------
-  | Register capability listeners
-  |---------------------------------------------------------------------------
-  |
-  | This method registers all capability listeners.
-  |
-  */
-
-  _registerCapabilityListeners() {
+  // Register capability listeners
+  registerCapabilityListeners() {
     this.registerCapabilityListener('download_enabled', async (enabled) => {
       if (enabled) {
         return this.resumedownload();
@@ -191,16 +137,8 @@ class NZBDevice extends Homey.Device {
     });
   }
 
-  /*
-  |---------------------------------------------------------------------------
-  | Refresh interval timer
-  |---------------------------------------------------------------------------
-  |
-  | This method sets the refresh interval in seconds.
-  |
-  */
-
-  _setRefreshTimer(seconds = 0) {
+  // Refresh interval timer
+  setRefreshTimer(seconds = 0) {
     if (this._refreshTimer) {
       this.homey.clearInterval(this._refreshTimer);
 
@@ -216,21 +154,13 @@ class NZBDevice extends Homey.Device {
     const refreshInterval = seconds * 1000;
 
     this._refreshTimer = this.homey.setInterval(async () => {
-      await this._updateDevice();
+      await this.updateDevice();
     }, refreshInterval);
 
     this.log(`Refresh interval set to ${seconds} seconds`);
   }
 
-  /*
-  |---------------------------------------------------------------------------
-  | Convert seconds to time
-  |---------------------------------------------------------------------------
-  |
-  | This method converts seconds to a readable format.
-  |
-  */
-
+  // Convert seconds to time
   _toTime(sec) {
     const sec_num = parseInt(sec, 10);
     let hours = Math.floor(sec_num / 3600);

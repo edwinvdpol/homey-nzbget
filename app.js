@@ -4,31 +4,14 @@ const Homey = require('homey');
 
 class NZBApp extends Homey.App {
 
-  /*
-  |---------------------------------------------------------------------------
-  | Initiate
-  |---------------------------------------------------------------------------
-  |
-  | This method is called upon initialization of this application.
-  |
-  */
-
+  // Initialized
   async onInit() {
     this.log('NZBApp is running...');
 
-    // Register flowcard actions
     await this.registerActions();
   }
 
-  /*
-  |---------------------------------------------------------------------------
-  | Register flowcard actions
-  |---------------------------------------------------------------------------
-  |
-  | Register flowcard actions which can be used in Homey 'Then' section.
-  |
-  */
-
+  // Register flowcard actions
   async registerActions() {
     // ... then pause download queue ...
     this.homey.flow.getActionCard('pausedownload').registerRunListener(async (args) => {

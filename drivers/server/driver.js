@@ -7,27 +7,21 @@ let minimalVersion = 15;
 
 class NZBDriver extends Homey.Driver {
 
-  /*
-  |---------------------------------------------------------------------------
-  | Pairing
-  |---------------------------------------------------------------------------
-  |
-  | This method is called when a pair session starts.
-  |
-  */
-
+  // Pairing
   onPair(session) {
     this.log('Pairing started');
 
-    session.setHandler('search_devices', async (data) => {
+    session.setHandler('connect', async (data) => {
       this.log('Connecting to server...');
-      this.log('Credentials:', data);
 
       try {
+        // Merge data with defaults
+        data = this.mergeData(data);
+
         const version = await new Api(data).version();
 
         if (Number(version) >= minimalVersion) {
-          await session.emit('add_server', {
+          await session.emit('create', {
             name: `NZBGet v${version}`,
             data: data
           });
@@ -38,6 +32,15 @@ class NZBDriver extends Homey.Driver {
     });
   }
 
+  // Merge data with defaults
+  mergeData(data) {
+    return {
+      host: data.host || 'http://127.0.0.1',
+      user: data.user || 'nzbget',
+      pass: data.pass || 'tegbzn6789',
+      port: data.port || 6789
+    }
+  }
 }
 
 module.exports = NZBDriver;

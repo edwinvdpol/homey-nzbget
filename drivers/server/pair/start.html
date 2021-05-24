@@ -52,7 +52,7 @@
       pass: document.getElementById('pair-pass').value
     };
 
-    Homey.emit('search_devices', data, (error) => {
+    Homey.emit('connect', data, (error) => {
       pBtn.disabled = false;
 
       if (error) {
@@ -61,7 +61,7 @@
       }
     });
 
-    Homey.on('add_server', function (data) {
+    Homey.on('create', function (data) {
       Homey.createDevice(data)
         .then(function () {
           Homey.done();
