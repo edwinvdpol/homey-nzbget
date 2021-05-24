@@ -19,6 +19,11 @@
       "$extends": "shutdown"
     }
   ],
+  "conditions": [
+    {
+      "$extends": "download_enabled"
+    }
+  ],
   "triggers": [
     {
       "$extends": "article_cache_changed"

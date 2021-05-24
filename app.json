@@ -202,6 +202,22 @@
         ]
       }
     ],
+    "conditions": [
+      {
+        "id": "download_enabled",
+        "title": {
+          "en": "Download queue is !{{active|pauzed}}",
+          "nl": "Downloadwachtrij is !{{actief|gepauzeerd}}"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=server"
+          }
+        ]
+      }
+    ],
     "actions": [
       {
         "id": "pausedownload",
