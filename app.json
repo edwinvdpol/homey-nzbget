@@ -9,8 +9,8 @@
     "en": "NZBGet"
   },
   "description": {
-    "en": "NZBGet for Homey",
-    "nl": "NZBGet voor Homey"
+    "en": "Monitor and control NZBGet servers",
+    "nl": "Monitor en beheer NZBGet servers"
   },
   "category": [
     "internet"
