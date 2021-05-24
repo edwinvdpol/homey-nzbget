@@ -21,7 +21,7 @@ class NZBApp extends Homey.App {
     // ... then set download speed limit ...
     this.homey.flow.getActionCard('rate').registerRunListener(async (args) => {
       return args.device.rate(args);
-    }).getArgument('download_rate');
+    });
 
     // ... then reload server ...
     this.homey.flow.getActionCard('reload').registerRunListener(async (args) => {

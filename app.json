@@ -60,6 +60,148 @@
     }
   },
   "flow": {
+    "triggers": [
+      {
+        "id": "article_cache_changed",
+        "title": {
+          "en": "Article cache changed",
+          "nl": "Artikel cache is veranderd"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=server"
+          }
+        ]
+      },
+      {
+        "id": "average_rate_changed",
+        "title": {
+          "en": "Average speed changed",
+          "nl": "Gemiddelde snelheid is veranderd"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=server"
+          }
+        ]
+      },
+      {
+        "id": "download_enabled_false",
+        "title": {
+          "en": "Downloading just paused",
+          "nl": "Downloaden werd gepauzeerd"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=server"
+          }
+        ]
+      },
+      {
+        "id": "download_enabled_true",
+        "title": {
+          "en": "Downloading just resumed",
+          "nl": "Downloaden werd hervat"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=server"
+          }
+        ]
+      },
+      {
+        "id": "download_rate_changed",
+        "title": {
+          "en": "Download speed changed",
+          "nl": "Download snelheid is veranderd"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=server"
+          }
+        ]
+      },
+      {
+        "id": "download_size_changed",
+        "title": {
+          "en": "Total downloaded changed",
+          "nl": "Totaal gedownload is veranderd"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=server"
+          }
+        ]
+      },
+      {
+        "id": "free_disk_space_changed",
+        "title": {
+          "en": "Free disk space changed",
+          "nl": "Vrije schijfruimte is veranderd"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=server"
+          }
+        ]
+      },
+      {
+        "id": "rate_limit_changed",
+        "title": {
+          "en": "Download limit changed",
+          "nl": "Download limiet is veranderd"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=server"
+          }
+        ]
+      },
+      {
+        "id": "remaining_files_changed",
+        "title": {
+          "en": "Files in queue changed",
+          "nl": "Bestanden in wachtrij is veranderd"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=server"
+          }
+        ]
+      },
+      {
+        "id": "remaining_size_changed",
+        "title": {
+          "en": "Download remaining changed",
+          "nl": "Nog te downloaden is veranderd"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=server"
+          }
+        ]
+      }
+    ],
     "actions": [
       {
         "id": "pausedownload",
