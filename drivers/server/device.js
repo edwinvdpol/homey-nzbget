@@ -68,7 +68,7 @@ class NZBDevice extends Homey.Device {
   */
 
   onDeleted() {
-    clearInterval(this._refreshTimer);
+    this.homey.clearInterval(this._refreshTimer);
 
     this.log('Device is deleted');
   }
@@ -182,7 +182,7 @@ class NZBDevice extends Homey.Device {
   */
 
   _registerCapabilityListeners() {
-    this.registerCapabilityListener('download_enabled', enabled => {
+    this.registerCapabilityListener('download_enabled', async (enabled) => {
       if (enabled) {
         return this.resumedownload();
       }
@@ -202,7 +202,7 @@ class NZBDevice extends Homey.Device {
 
   _setRefreshTimer(seconds = 0) {
     if (this._refreshTimer) {
-      clearInterval(this._refreshTimer);
+      this.homey.clearInterval(this._refreshTimer);
 
       this._refreshTimer = null;
     }
@@ -215,7 +215,7 @@ class NZBDevice extends Homey.Device {
 
     const refreshInterval = seconds * 1000;
 
-    this._refreshTimer = setInterval(async () => {
+    this._refreshTimer = this.homey.setInterval(async () => {
       await this._updateDevice();
     }, refreshInterval);
 

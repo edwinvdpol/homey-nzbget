@@ -4,9 +4,10 @@
     "error": "Er is een serverfout opgetreden",
     "forbidden": "De toegang is geweigerd",
     "response": "Ongeldige response ontvangen",
-    "unauthorized": "Gebruikersnaam of wachtwoord is ongeldig"
+    "unauthorized": "Gebruikersnaam of wachtwoord is ongeldig",
+    "version": "Versie __version__ wordt niet ondersteund"
   },
-  "login": "Inloggen",
+  "add": "Toevoegen",
   "password": "Wachtwoord",
   "port": "Poort",
   "username": "Gebruikersnaam"

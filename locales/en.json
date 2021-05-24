@@ -4,9 +4,10 @@
     "error": "A server error occurred",
     "forbidden": "Access has been denied",
     "response": "Invalid response received",
-    "unauthorized": "Username or password is invalid"
+    "unauthorized": "Username or password is invalid",
+    "version": "Version __version__ is not supported"
   },
-  "login": "Login",
+  "add": "Add",
   "password": "Password",
   "port": "Port",
   "username": "Username"
