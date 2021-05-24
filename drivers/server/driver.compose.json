@@ -23,8 +23,8 @@
     }
   ],
   "images": {
-    "large": "/drivers/nzbdriver/assets/images/large.png",
-    "small": "/drivers/nzbdriver/assets/images/small.png"
+    "large": "{{driverPath}}/assets/images/large.png",
+    "small": "{{driverPath}}/assets/images/small.png"
   },
   "settings": [
     {
