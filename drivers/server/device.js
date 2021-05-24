@@ -7,23 +7,19 @@ class NZBDevice extends Homey.Device {
 
   // Initialized
   async onInit() {
-    try {
-      this.log('Device is initiated');
+    this.log('Device is initiated');
 
-      // Register capability listeners
-      this.registerCapabilityListeners();
+    // Register capability listeners
+    this.registerCapabilityListeners();
 
-      // Create API object
-      this.api = new Api(this.getData());
+    // Create API object
+    this.api = new Api(this.getData());
 
-      // Update device statistics on startup
-      await this.updateDevice();
+    // Sync device statistics
+    await this.syncDevice();
 
-      // Refresh timer
-      this.setRefreshTimer(this.getSetting('refresh_interval'));
-    } catch (err) {
-      await this.setUnavailable(err.message);
-    }
+    // Refresh timer
+    this.setRefreshTimer(this.getSetting('refresh_interval'));
   }
 
   // Settings changed
@@ -48,51 +44,77 @@ class NZBDevice extends Homey.Device {
   async pausedownload() {
     this.log('Pause download queue');
 
-    await this.api.pausedownload();
-    await this.setCapabilityValue('download_enabled', false);
+    try {
+      await this.api.pausedownload();
+      await this.setCapabilityValue('download_enabled', false);
+    } catch (err) {
+      throw new Error(this.homey.__(err.message));
+    }
   }
 
   // Set download speed limit
   async rate(args) {
     this.log(`Set download limit to ${args.download_rate} MB/s`);
 
-    await this.api.rate(args.download_rate);
-    await this.setCapabilityValue('rate_limit', args.download_rate);
+    try {
+      await this.api.rate(args.download_rate);
+      await this.setCapabilityValue('rate_limit', args.download_rate);
+    } catch (err) {
+      throw new Error(this.homey.__(err.message));
+    }
   }
 
   // Reload server
   async reload() {
     this.log('Reload');
 
-    await this.api.reload();
+    try {
+      await this.api.reload();
+    } catch (err) {
+      throw new Error(this.homey.__(err.message));
+    }
   }
 
   // Resume download queue
   async resumedownload() {
     this.log('Resume download queue');
 
-    await this.api.resumedownload();
-    await this.setCapabilityValue('download_enabled', true);
+    try {
+      await this.api.resumedownload();
+      await this.setCapabilityValue('download_enabled', true);
+    } catch (err) {
+      throw new Error(this.homey.__(err.message));
+    }
   }
 
   // Scan incoming directory for nzb-files
   async scan() {
     this.log('Scan incoming directory for nzb-files');
 
-    await this.api.scan();
+    try {
+      await this.api.scan();
+    } catch (err) {
+      throw new Error(this.homey.__(err.message));
+    }
   }
 
   // Shutdown server
   async shutdown() {
     this.log('Shutdown');
 
-    await this.api.shutdown();
+    try {
+      await this.api.shutdown();
+    } catch (err) {
+      throw new Error(this.homey.__(err.message));
+    }
   }
 
-  // Update device
-  async updateDevice() {
+  // Sync device data
+  async syncDevice() {
     try {
-      const status = await this.api.status();
+      const status = await this.api.status().catch(err => {
+        return this.setUnavailable(this.homey.__(err.message));
+      });
 
       // Convert data
       const average_rate = parseFloat(status.AverageDownloadRate / 1024000);
@@ -114,7 +136,9 @@ class NZBDevice extends Homey.Device {
       await this.setCapabilityValue('remaining_size', Number(status.RemainingSizeMB));
       await this.setCapabilityValue('uptime', this._toTime(status.UpTimeSec));
 
-      const files = await this.api.listfiles();
+      const files = await this.api.listfiles().catch(err => {
+        return this.setUnavailable(this.homey.__(err.message));
+      });
 
       await this.setCapabilityValue('remaining_files', Object.keys(files).length);
 
@@ -154,7 +178,7 @@ class NZBDevice extends Homey.Device {
     const refreshInterval = seconds * 1000;
 
     this._refreshTimer = this.homey.setInterval(async () => {
-      await this.updateDevice();
+      await this.syncDevice();
     }, refreshInterval);
 
     this.log(`Refresh interval set to ${seconds} seconds`);

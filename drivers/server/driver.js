@@ -3,7 +3,7 @@
 const Homey = require('homey');
 const Api = require('/lib/Api.js');
 
-let minimalVersion = 15;
+const minimalVersion = 15;
 
 class NZBDriver extends Homey.Driver {
 
@@ -14,21 +14,21 @@ class NZBDriver extends Homey.Driver {
     session.setHandler('connect', async (data) => {
       this.log('Connecting to server...');
 
-      try {
-        // Merge data with defaults
-        data = this.mergeData(data);
+      // Merge data with defaults
+      data = this.mergeData(data);
 
-        const version = await new Api(data).version();
-
-        if (Number(version) >= minimalVersion) {
-          await session.emit('create', {
-            name: `NZBGet v${version}`,
-            data: data
-          });
-        }
-      } catch (err) {
+      const version = await new Api(data).version().catch(err => {
         throw new Error(this.homey.__(err.message));
+      });
+
+      if (Number(version) < minimalVersion) {
+        throw new Error(this.homey.__('api.version', {version: version}));
       }
+
+      await session.emit('create', {
+        name: `NZBGet v${version}`,
+        data: data
+      });
     });
   }
 
