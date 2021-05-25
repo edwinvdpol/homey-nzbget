@@ -1,3 +1,6 @@
+## 1.1.1 / 2021-05-25
+- Fixed driver name
+
 ## 1.1.0 / 2021-05-25
 - Updated to Homey SDK 3 and added flowcards
 
