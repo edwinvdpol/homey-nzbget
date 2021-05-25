@@ -1,7 +1,10 @@
 {
   "title": {
-    "en": "Shutdown the server",
-    "nl": "Sluit de server af"
+    "en": "Shutdown NZBGet",
+    "nl": "Sluit NZBGet af"
   },
-  "args": []
+  "hint": {
+    "en": "Use this flowcard to shutdown NZBGet.",
+    "nl": "Gebruik deze flowcard om NZBGet af te sluiten."
+  }
 }

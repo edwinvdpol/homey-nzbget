@@ -1,7 +1,10 @@
 {
   "title": {
-    "en": "Scan incoming directory for nzb-files",
-    "nl": "Inkomende map scannen voor nzb-bestanden"
+    "en": "Scan incoming directory",
+    "nl": "Scan inkomende map"
   },
-  "args": []
+  "hint": {
+    "en": "Use this flowcard to scan the incoming directory for nzb-files.",
+    "nl": "Gebruik deze flowcard om de inkomende directory te scannen op nzb-bestanden."
+  }
 }

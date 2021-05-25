@@ -64,8 +64,12 @@
       {
         "id": "article_cache_changed",
         "title": {
-          "en": "Article cache changed",
-          "nl": "Artikel cache is veranderd"
+          "en": "Article cache has changed",
+          "nl": "Artikelcache is veranderd"
+        },
+        "hint": {
+          "en": "This flowcard triggers when the article cache has changed.",
+          "nl": "Deze flowcard wordt geactiveerd wanneer de artikelcache veranderd is."
         },
         "args": [
           {
@@ -81,6 +85,10 @@
           "en": "Average speed changed",
           "nl": "Gemiddelde snelheid is veranderd"
         },
+        "hint": {
+          "en": "This flowcard triggers when the average download speed has changed.",
+          "nl": "Deze flowcard wordt geactiveerd wanneer de gemiddelde downloadsnelheid veranderd is."
+        },
         "args": [
           {
             "type": "device",
@@ -92,8 +100,12 @@
       {
         "id": "download_enabled_false",
         "title": {
-          "en": "Downloading just paused",
-          "nl": "Downloaden werd gepauzeerd"
+          "en": "Download queue just paused",
+          "nl": "Downloadwachtrij werd gepauzeerd"
+        },
+        "hint": {
+          "en": "This flowcard triggers when the download queue was pauzed.",
+          "nl": "Deze flowcard wordt geactiveerd wanneer de downloadwachtrij gepauzeerd werd."
         },
         "args": [
           {
@@ -106,8 +118,12 @@
       {
         "id": "download_enabled_true",
         "title": {
-          "en": "Downloading just resumed",
-          "nl": "Downloaden werd hervat"
+          "en": "Download queue just resumed",
+          "nl": "Downloadwachtrij werd hervat"
+        },
+        "hint": {
+          "en": "This flowcard triggers when the download queue was resumed.",
+          "nl": "Deze flowcard wordt geactiveerd wanneer de downloadwachtrij hervat werd."
         },
         "args": [
           {
@@ -121,7 +137,11 @@
         "id": "download_rate_changed",
         "title": {
           "en": "Download speed changed",
-          "nl": "Download snelheid is veranderd"
+          "nl": "Downloadsnelheid is veranderd"
+        },
+        "hint": {
+          "en": "This flowcard triggers when the download speed has changed.",
+          "nl": "Deze flowcard wordt geactiveerd wanneer de downloadsnelheid veranderd is."
         },
         "args": [
           {
@@ -137,6 +157,10 @@
           "en": "Total downloaded changed",
           "nl": "Totaal gedownload is veranderd"
         },
+        "hint": {
+          "en": "This flowcard triggers when the total downloaded has changed.",
+          "nl": "Deze flowcard wordt geactiveerd wanneer het totaal gedownload veranderd is."
+        },
         "args": [
           {
             "type": "device",
@@ -151,6 +175,10 @@
           "en": "Free disk space changed",
           "nl": "Vrije schijfruimte is veranderd"
         },
+        "hint": {
+          "en": "This flowcard triggers when the free disk space has changed.",
+          "nl": "Deze flowcard wordt geactiveerd wanneer de vrije schijfruimte veranderd is."
+        },
         "args": [
           {
             "type": "device",
@@ -163,7 +191,11 @@
         "id": "rate_limit_changed",
         "title": {
           "en": "Download limit changed",
-          "nl": "Download limiet is veranderd"
+          "nl": "Downloadlimiet is veranderd"
+        },
+        "hint": {
+          "en": "This flowcard triggers when the download limit has changed.",
+          "nl": "Deze flowcard wordt geactiveerd wanneer de downloadlimiet veranderd is."
         },
         "args": [
           {
@@ -176,8 +208,12 @@
       {
         "id": "remaining_files_changed",
         "title": {
-          "en": "Files in queue changed",
-          "nl": "Bestanden in wachtrij is veranderd"
+          "en": "Download queue changed",
+          "nl": "Downloadwachtrij is veranderd"
+        },
+        "hint": {
+          "en": "This flowcard triggers when the amount of files in queue has changed.",
+          "nl": "Deze flowcard wordt geactiveerd wanneer het aantal bestanden in de wachtrij veranderd is."
         },
         "args": [
           {
@@ -192,6 +228,10 @@
         "title": {
           "en": "Download remaining changed",
           "nl": "Nog te downloaden is veranderd"
+        },
+        "hint": {
+          "en": "This flowcard triggers when the download remaining has changed.",
+          "nl": "Deze flowcard wordt geactiveerd wanneer het nog te downloaden veranderd is."
         },
         "args": [
           {
@@ -209,6 +249,10 @@
           "en": "Download queue is !{{active|pauzed}}",
           "nl": "Downloadwachtrij is !{{actief|gepauzeerd}}"
         },
+        "hint": {
+          "en": "Checks if the download queue is currently active/pauzed.",
+          "nl": "Controleert of de downloadwachtrij momenteel actief/gepauzeerd is."
+        },
         "args": [
           {
             "type": "device",
@@ -223,7 +267,11 @@
         "id": "pausedownload",
         "title": {
           "en": "Pause download queue",
-          "nl": "Downloadwachtrij pauzeren"
+          "nl": "Pauzeer downloadwachtrij"
+        },
+        "hint": {
+          "en": "Use this flowcard to pauze the download queue.",
+          "nl": "Gebruik deze flowcard om de downloadwachtrij te pauzeren."
         },
         "args": [
           {
@@ -237,7 +285,11 @@
         "id": "resumedownload",
         "title": {
           "en": "Resume download queue",
-          "nl": "Downloadwachtrij hervatten"
+          "nl": "Hervat downloadwachtrij"
+        },
+        "hint": {
+          "en": "Use this flowcard to resume the download queue.",
+          "nl": "Gebruik deze flowcard om de downloadwachtrij te hervatten."
         },
         "args": [
           {
@@ -250,12 +302,16 @@
       {
         "id": "rate",
         "title": {
-          "en": "Set download speed limit",
-          "nl": "Stel download snelheidslimiet in"
+          "en": "Limit download speed",
+          "nl": "Beperk downloadsnelheid"
         },
         "titleFormatted": {
           "en": "Set download speed limit to [[download_rate]] MB/s",
           "nl": "Stel download snelheidslimiet in van [[download_rate]] MB/s"
+        },
+        "hint": {
+          "en": "Use this flowcard to limit the download speed.",
+          "nl": "Gebruik deze flowcard om de downloadsnelheid te beperken."
         },
         "args": [
           {
@@ -269,8 +325,8 @@
             "min": 0,
             "step": 1,
             "placeholder": {
-              "en": "In MB/s (0 = off)",
-              "nl": "In MB/s (0 = uit)"
+              "en": "(0 = off)",
+              "nl": "(0 = uit)"
             }
           }
         ]
@@ -278,8 +334,12 @@
       {
         "id": "scan",
         "title": {
-          "en": "Scan incoming directory for nzb-files",
-          "nl": "Inkomende map scannen voor nzb-bestanden"
+          "en": "Scan incoming directory",
+          "nl": "Scan inkomende map"
+        },
+        "hint": {
+          "en": "Use this flowcard to scan the incoming directory for nzb-files.",
+          "nl": "Gebruik deze flowcard om de inkomende directory te scannen op nzb-bestanden."
         },
         "args": [
           {
@@ -292,8 +352,12 @@
       {
         "id": "reload",
         "title": {
-          "en": "Reload the server",
-          "nl": "Laad de server opnieuw"
+          "en": "Reload NZBGet",
+          "nl": "Herlaad NZBGet"
+        },
+        "hint": {
+          "en": "Use this flowcard to reload NZBGet.",
+          "nl": "Gebruik deze flowcard om NZBGet te herladen."
         },
         "args": [
           {
@@ -306,8 +370,12 @@
       {
         "id": "shutdown",
         "title": {
-          "en": "Shutdown the server",
-          "nl": "Sluit de server af"
+          "en": "Shutdown NZBGet",
+          "nl": "Sluit NZBGet af"
+        },
+        "hint": {
+          "en": "Use this flowcard to shutdown NZBGet.",
+          "nl": "Gebruik deze flowcard om NZBGet af te sluiten."
         },
         "args": [
           {
@@ -423,7 +491,7 @@
       "decimals": 2,
       "title": {
         "en": "Download speed",
-        "nl": "Download snelheid"
+        "nl": "Downloadsnelheid"
       },
       "icon": "/assets/download-speed.svg",
       "insights": true,
@@ -450,8 +518,8 @@
     "download_time": {
       "type": "string",
       "title": {
-        "en": "Total download time",
-        "nl": "Totale downloadtijd"
+        "en": "Download time",
+        "nl": "Downloadtijd"
       },
       "icon": "/assets/clock.svg",
       "getable": true,
@@ -474,7 +542,7 @@
       "type": "number",
       "title": {
         "en": "Download limit",
-        "nl": "Download limiet"
+        "nl": "Downloadlimiet"
       },
       "icon": "/assets/download-speed.svg",
       "getable": true,
@@ -486,8 +554,8 @@
     "remaining_files": {
       "type": "number",
       "title": {
-        "en": "Files in queue",
-        "nl": "Bestanden in wachtrij"
+        "en": "Download queue",
+        "nl": "Downloadwachtrij"
       },
       "icon": "/assets/file.svg",
       "getable": true,

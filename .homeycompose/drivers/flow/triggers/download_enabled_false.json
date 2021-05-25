@@ -1,6 +1,10 @@
 {
   "title": {
-    "en": "Downloading just paused",
-    "nl": "Downloaden werd gepauzeerd"
+    "en": "Download queue just paused",
+    "nl": "Downloadwachtrij werd gepauzeerd"
+  },
+  "hint": {
+    "en": "This flowcard triggers when the download queue was pauzed.",
+    "nl": "Deze flowcard wordt geactiveerd wanneer de downloadwachtrij gepauzeerd werd."
   }
 }

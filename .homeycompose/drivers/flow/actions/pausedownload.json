@@ -1,7 +1,10 @@
 {
   "title": {
     "en": "Pause download queue",
-    "nl": "Downloadwachtrij pauzeren"
+    "nl": "Pauzeer downloadwachtrij"
   },
-  "args": []
+  "hint": {
+    "en": "Use this flowcard to pauze the download queue.",
+    "nl": "Gebruik deze flowcard om de downloadwachtrij te pauzeren."
+  }
 }

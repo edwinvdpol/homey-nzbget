@@ -1,11 +1,15 @@
 {
   "title": {
-    "en": "Set download speed limit",
-    "nl": "Stel download snelheidslimiet in"
+    "en": "Limit download speed",
+    "nl": "Beperk downloadsnelheid"
   },
   "titleFormatted": {
     "en": "Set download speed limit to [[download_rate]] MB/s",
     "nl": "Stel download snelheidslimiet in van [[download_rate]] MB/s"
+  },
+  "hint": {
+    "en": "Use this flowcard to limit the download speed.",
+    "nl": "Gebruik deze flowcard om de downloadsnelheid te beperken."
   },
   "args": [
     {
@@ -14,8 +18,8 @@
       "min": 0,
       "step": 1,
       "placeholder": {
-        "en": "In MB/s (0 = off)",
-        "nl": "In MB/s (0 = uit)"
+        "en": "(0 = off)",
+        "nl": "(0 = uit)"
       }
     }
   ]

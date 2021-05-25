@@ -1,6 +1,10 @@
 {
   "title": {
     "en": "Download speed changed",
-    "nl": "Download snelheid is veranderd"
+    "nl": "Downloadsnelheid is veranderd"
+  },
+  "hint": {
+    "en": "This flowcard triggers when the download speed has changed.",
+    "nl": "Deze flowcard wordt geactiveerd wanneer de downloadsnelheid veranderd is."
   }
 }

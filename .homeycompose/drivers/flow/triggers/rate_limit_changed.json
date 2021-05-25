@@ -1,6 +1,10 @@
 {
   "title": {
     "en": "Download limit changed",
-    "nl": "Download limiet is veranderd"
+    "nl": "Downloadlimiet is veranderd"
+  },
+  "hint": {
+    "en": "This flowcard triggers when the download limit has changed.",
+    "nl": "Deze flowcard wordt geactiveerd wanneer de downloadlimiet veranderd is."
   }
 }

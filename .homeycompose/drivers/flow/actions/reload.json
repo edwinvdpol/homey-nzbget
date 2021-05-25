@@ -1,7 +1,10 @@
 {
   "title": {
-    "en": "Reload the server",
-    "nl": "Laad de server opnieuw"
+    "en": "Reload NZBGet",
+    "nl": "Herlaad NZBGet"
   },
-  "args": []
+  "hint": {
+    "en": "Use this flowcard to reload NZBGet.",
+    "nl": "Gebruik deze flowcard om NZBGet te herladen."
+  }
 }

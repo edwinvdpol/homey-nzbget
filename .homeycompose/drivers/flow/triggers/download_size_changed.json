@@ -2,5 +2,9 @@
   "title": {
     "en": "Total downloaded changed",
     "nl": "Totaal gedownload is veranderd"
+  },
+  "hint": {
+    "en": "This flowcard triggers when the total downloaded has changed.",
+    "nl": "Deze flowcard wordt geactiveerd wanneer het totaal gedownload veranderd is."
   }
 }

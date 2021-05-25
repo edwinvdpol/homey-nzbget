@@ -3,7 +3,7 @@
   "decimals": 2,
   "title": {
     "en": "Download speed",
-    "nl": "Download snelheid"
+    "nl": "Downloadsnelheid"
   },
   "icon": "/assets/download-speed.svg",
   "insights": true,

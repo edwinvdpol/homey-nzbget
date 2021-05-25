@@ -2,5 +2,9 @@
   "title": {
     "en": "Download queue is !{{active|pauzed}}",
     "nl": "Downloadwachtrij is !{{actief|gepauzeerd}}"
+  },
+  "hint": {
+    "en": "Checks if the download queue is currently active/pauzed.",
+    "nl": "Controleert of de downloadwachtrij momenteel actief/gepauzeerd is."
   }
 }

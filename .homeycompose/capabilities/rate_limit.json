@@ -2,7 +2,7 @@
   "type": "number",
   "title": {
     "en": "Download limit",
-    "nl": "Download limiet"
+    "nl": "Downloadlimiet"
   },
   "icon": "/assets/download-speed.svg",
   "getable": true,

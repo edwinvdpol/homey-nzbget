@@ -1,6 +1,10 @@
 {
   "title": {
-    "en": "Downloading just resumed",
-    "nl": "Downloaden werd hervat"
+    "en": "Download queue just resumed",
+    "nl": "Downloadwachtrij werd hervat"
+  },
+  "hint": {
+    "en": "This flowcard triggers when the download queue was resumed.",
+    "nl": "Deze flowcard wordt geactiveerd wanneer de downloadwachtrij hervat werd."
   }
 }

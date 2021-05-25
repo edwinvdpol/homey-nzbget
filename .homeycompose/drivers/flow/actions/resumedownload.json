@@ -1,7 +1,10 @@
 {
   "title": {
     "en": "Resume download queue",
-    "nl": "Downloadwachtrij hervatten"
+    "nl": "Hervat downloadwachtrij"
   },
-  "args": []
+  "hint": {
+    "en": "Use this flowcard to resume the download queue.",
+    "nl": "Gebruik deze flowcard om de downloadwachtrij te hervatten."
+  }
 }

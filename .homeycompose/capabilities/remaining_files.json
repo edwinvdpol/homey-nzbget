@@ -1,8 +1,8 @@
 {
   "type": "number",
   "title": {
-    "en": "Files in queue",
-    "nl": "Bestanden in wachtrij"
+    "en": "Download queue",
+    "nl": "Downloadwachtrij"
   },
   "icon": "/assets/file.svg",
   "getable": true,
