@@ -75,7 +75,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=server"
+            "filter": "driver_id=nzbdriver"
           }
         ]
       },
@@ -93,7 +93,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=server"
+            "filter": "driver_id=nzbdriver"
           }
         ]
       },
@@ -111,7 +111,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=server"
+            "filter": "driver_id=nzbdriver"
           }
         ]
       },
@@ -129,7 +129,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=server"
+            "filter": "driver_id=nzbdriver"
           }
         ]
       },
@@ -147,7 +147,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=server"
+            "filter": "driver_id=nzbdriver"
           }
         ]
       },
@@ -165,7 +165,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=server"
+            "filter": "driver_id=nzbdriver"
           }
         ]
       },
@@ -183,7 +183,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=server"
+            "filter": "driver_id=nzbdriver"
           }
         ]
       },
@@ -201,7 +201,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=server"
+            "filter": "driver_id=nzbdriver"
           }
         ]
       },
@@ -219,7 +219,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=server"
+            "filter": "driver_id=nzbdriver"
           }
         ]
       },
@@ -237,7 +237,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=server"
+            "filter": "driver_id=nzbdriver"
           }
         ]
       }
@@ -257,7 +257,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=server"
+            "filter": "driver_id=nzbdriver"
           }
         ]
       }
@@ -277,7 +277,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=server"
+            "filter": "driver_id=nzbdriver"
           }
         ]
       },
@@ -295,7 +295,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=server"
+            "filter": "driver_id=nzbdriver"
           }
         ]
       },
@@ -317,7 +317,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=server"
+            "filter": "driver_id=nzbdriver"
           },
           {
             "type": "number",
@@ -348,7 +348,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=server"
+            "filter": "driver_id=nzbdriver"
           }
         ]
       },
@@ -366,7 +366,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=server"
+            "filter": "driver_id=nzbdriver"
           }
         ]
       },
@@ -384,7 +384,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=server"
+            "filter": "driver_id=nzbdriver"
           }
         ]
       }
@@ -392,7 +392,7 @@
   },
   "drivers": [
     {
-      "id": "server",
+      "id": "nzbdriver",
       "name": {
         "en": "Server"
       },
@@ -416,8 +416,8 @@
         }
       ],
       "images": {
-        "large": "/drivers/server/assets/images/large.png",
-        "small": "/drivers/server/assets/images/small.png"
+        "large": "/drivers/nzbdriver/assets/images/large.png",
+        "small": "/drivers/nzbdriver/assets/images/small.png"
       },
       "settings": [
         {
