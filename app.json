@@ -306,8 +306,8 @@
           "nl": "Beperk downloadsnelheid"
         },
         "titleFormatted": {
-          "en": "Set download speed limit to [[download_rate]] MB/s",
-          "nl": "Stel download snelheidslimiet in van [[download_rate]] MB/s"
+          "en": "Limit the download speed to [[download_rate]] MB/s",
+          "nl": "Beperk de downloadsnelheid tot [[download_rate]] MB/s"
         },
         "hint": {
           "en": "Use this flowcard to limit the download speed.",
@@ -322,11 +322,14 @@
           {
             "type": "number",
             "name": "download_rate",
+            "title": {
+              "en": "Download speed",
+              "nl": "Downloadsnelheid"
+            },
             "min": 0,
             "step": 1,
             "placeholder": {
-              "en": "(0 = off)",
-              "nl": "(0 = uit)"
+              "en": "MB/s"
             }
           }
         ]
