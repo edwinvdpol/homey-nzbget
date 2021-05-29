@@ -44,69 +44,45 @@ class NZBDevice extends Homey.Device {
   async pausedownload() {
     this.log('Pause download queue');
 
-    try {
-      await this.api.pausedownload();
-      await this.setCapabilityValue('download_enabled', false);
-    } catch (err) {
-      throw new Error(err.message);
-    }
+    await this.api.pausedownload();
+    await this.setCapabilityValue('download_enabled', false);
   }
 
   // Set download speed limit
   async rate(args) {
     this.log(`Set download limit to ${args.download_rate} MB/s`);
 
-    try {
-      await this.api.rate(args.download_rate);
-      await this.setCapabilityValue('rate_limit', args.download_rate);
-    } catch (err) {
-      throw new Error(err.message);
-    }
+    await this.api.rate(args.download_rate);
+    await this.setCapabilityValue('rate_limit', args.download_rate);
   }
 
   // Reload server
   async reload() {
     this.log('Reload');
 
-    try {
-      await this.api.reload();
-    } catch (err) {
-      throw new Error(err.message);
-    }
+    await this.api.reload();
   }
 
   // Resume download queue
   async resumedownload() {
     this.log('Resume download queue');
 
-    try {
-      await this.api.resumedownload();
-      await this.setCapabilityValue('download_enabled', true);
-    } catch (err) {
-      throw new Error(err.message);
-    }
+    await this.api.resumedownload();
+    await this.setCapabilityValue('download_enabled', true);
   }
 
   // Scan incoming directory for nzb-files
   async scan() {
     this.log('Scan incoming directory for nzb-files');
 
-    try {
-      await this.api.scan();
-    } catch (err) {
-      throw new Error(err.message);
-    }
+    await this.api.scan();
   }
 
   // Shutdown server
   async shutdown() {
     this.log('Shutdown');
 
-    try {
-      await this.api.shutdown();
-    } catch (err) {
-      throw new Error(err.message);
-    }
+    await this.api.shutdown();
   }
 
   // Sync device data
@@ -153,7 +129,6 @@ class NZBDevice extends Homey.Device {
   setRefreshTimer(seconds = 0) {
     if (this._refreshTimer) {
       this.homey.clearInterval(this._refreshTimer);
-
       this._refreshTimer = null;
     }
 
