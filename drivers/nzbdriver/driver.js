@@ -1,17 +1,17 @@
 'use strict';
 
 const Homey = require('homey');
-const Api = require('/lib/Api.js');
-
-const minimalVersion = 15;
+const Api = require('../../lib/Api');
 
 class NZBDriver extends Homey.Driver {
+
+  static MINIMUMVERSION = 15;
 
   // Pairing
   onPair(session) {
     this.log('Pairing started');
 
-    session.setHandler('connect', async (data) => {
+    session.setHandler('connect', async data => {
       this.log('Connecting to server...');
 
       // Merge data with defaults
@@ -21,13 +21,13 @@ class NZBDriver extends Homey.Driver {
         throw new Error(this.homey.__(err.message));
       });
 
-      if (Number(version) < minimalVersion) {
-        throw new Error(this.homey.__('api.version', {version: version}));
+      if (Number(version) < this.constructor.MINIMUMVERSION) {
+        throw new Error(this.homey.__('api.version', { version }));
       }
 
       await session.emit('create', {
         name: `NZBGet v${version}`,
-        data: data
+        data,
       });
     });
   }
@@ -38,9 +38,10 @@ class NZBDriver extends Homey.Driver {
       host: data.host || 'http://127.0.0.1',
       user: data.user || 'nzbget',
       pass: data.pass || 'tegbzn6789',
-      port: data.port || 6789
-    }
+      port: data.port || 6789,
+    };
   }
+
 }
 
 module.exports = NZBDriver;

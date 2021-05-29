@@ -1,7 +1,7 @@
 'use strict';
 
 const Homey = require('homey');
-const Api = require('/lib/Api.js');
+const Api = require('../../lib/Api');
 
 class NZBDevice extends Homey.Device {
 
@@ -23,7 +23,7 @@ class NZBDevice extends Homey.Device {
   }
 
   // Settings changed
-  async onSettings({oldSettings, newSettings, changedKeys}) {
+  async onSettings({ oldSettings, newSettings, changedKeys }) {
     changedKeys.forEach(name => {
       this.log(`Setting \`${name}\` set \`${oldSettings[name]}\` => \`${newSettings[name]}\``);
 
@@ -116,23 +116,15 @@ class NZBDevice extends Homey.Device {
         return this.setUnavailable(this.homey.__(err.message));
       });
 
-      // Convert data
-      const average_rate = parseFloat(status.AverageDownloadRate / 1024000);
-      const download_enabled = (!status.DownloadPaused);
-      const download_rate = parseFloat(status.DownloadRate / 1024000);
-      const download_size = parseFloat(status.DownloadedSizeMB / 1024);
-      const free_disk_space = Math.floor(status.FreeDiskSpaceMB / 1024);
-      const rate_limit = Number(status.DownloadLimit / 1024000);
-
       // Capability values
       await this.setCapabilityValue('article_cache', parseFloat(status.ArticleCacheMB));
-      await this.setCapabilityValue('average_rate', average_rate);
-      await this.setCapabilityValue('download_enabled', download_enabled);
-      await this.setCapabilityValue('download_rate', download_rate);
-      await this.setCapabilityValue('download_size', download_size);
+      await this.setCapabilityValue('average_rate', parseFloat(status.AverageDownloadRate / 1024000));
+      await this.setCapabilityValue('download_enabled', !status.DownloadPaused);
+      await this.setCapabilityValue('download_rate', parseFloat(status.DownloadRate / 1024000));
+      await this.setCapabilityValue('download_size', parseFloat(status.DownloadedSizeMB / 1024));
       await this.setCapabilityValue('download_time', this._toTime(Number(status.DownloadTimeSec)));
-      await this.setCapabilityValue('free_disk_space', free_disk_space);
-      await this.setCapabilityValue('rate_limit', rate_limit);
+      await this.setCapabilityValue('free_disk_space', Math.floor(status.FreeDiskSpaceMB / 1024));
+      await this.setCapabilityValue('rate_limit', Number(status.DownloadLimit / 1024000));
       await this.setCapabilityValue('remaining_size', Number(status.RemainingSizeMB));
       await this.setCapabilityValue('uptime', this._toTime(status.UpTimeSec));
 
@@ -152,7 +144,7 @@ class NZBDevice extends Homey.Device {
 
   // Register capability listeners
   registerCapabilityListeners() {
-    this.registerCapabilityListener('download_enabled', async (enabled) => {
+    this.registerCapabilityListener('download_enabled', async enabled => {
       if (enabled) {
         return this.resumedownload();
       }
@@ -186,22 +178,23 @@ class NZBDevice extends Homey.Device {
 
   // Convert seconds to time
   _toTime(sec) {
-    const sec_num = parseInt(sec, 10);
-    let hours = Math.floor(sec_num / 3600);
-    let minutes = Math.floor((sec_num - (hours * 3600)) / 60);
-    let seconds = sec_num - (hours * 3600) - (minutes * 60);
+    const secNum = parseInt(sec, 10);
+    let hours = Math.floor(secNum / 3600);
+    let minutes = Math.floor((secNum - (hours * 3600)) / 60);
+    let seconds = secNum - (hours * 3600) - (minutes * 60);
 
     if (hours < 10) {
-      hours = "0" + hours;
-    }
-    if (minutes < 10) {
-      minutes = "0" + minutes;
-    }
-    if (seconds < 10) {
-      seconds = "0" + seconds;
+      hours = `0${hours}`;
     }
 
-    return hours + ':' + minutes + ':' + seconds;
+    if (minutes < 10) {
+      minutes = `0${minutes}`;
+    }
+    if (seconds < 10) {
+      seconds = `0${seconds}`;
+    }
+
+    return `${hours}:${minutes}:${seconds}`;
   }
 
 }
