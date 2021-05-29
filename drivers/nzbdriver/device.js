@@ -13,7 +13,7 @@ class NZBDevice extends Homey.Device {
     this.registerCapabilityListeners();
 
     // Create API object
-    this.api = new Api(this.getData());
+    this.api = new Api(this.getData(), this.homey);
 
     // Sync device statistics
     await this.syncDevice();
@@ -48,7 +48,7 @@ class NZBDevice extends Homey.Device {
       await this.api.pausedownload();
       await this.setCapabilityValue('download_enabled', false);
     } catch (err) {
-      throw new Error(this.homey.__(err.message));
+      throw new Error(err.message);
     }
   }
 
@@ -60,7 +60,7 @@ class NZBDevice extends Homey.Device {
       await this.api.rate(args.download_rate);
       await this.setCapabilityValue('rate_limit', args.download_rate);
     } catch (err) {
-      throw new Error(this.homey.__(err.message));
+      throw new Error(err.message);
     }
   }
 
@@ -71,7 +71,7 @@ class NZBDevice extends Homey.Device {
     try {
       await this.api.reload();
     } catch (err) {
-      throw new Error(this.homey.__(err.message));
+      throw new Error(err.message);
     }
   }
 
@@ -83,7 +83,7 @@ class NZBDevice extends Homey.Device {
       await this.api.resumedownload();
       await this.setCapabilityValue('download_enabled', true);
     } catch (err) {
-      throw new Error(this.homey.__(err.message));
+      throw new Error(err.message);
     }
   }
 
@@ -94,7 +94,7 @@ class NZBDevice extends Homey.Device {
     try {
       await this.api.scan();
     } catch (err) {
-      throw new Error(this.homey.__(err.message));
+      throw new Error(err.message);
     }
   }
 
@@ -105,16 +105,14 @@ class NZBDevice extends Homey.Device {
     try {
       await this.api.shutdown();
     } catch (err) {
-      throw new Error(this.homey.__(err.message));
+      throw new Error(err.message);
     }
   }
 
   // Sync device data
   async syncDevice() {
     try {
-      const status = await this.api.status().catch(err => {
-        return this.setUnavailable(this.homey.__(err.message));
-      });
+      const status = await this.api.status();
 
       // Capability values
       await this.setCapabilityValue('article_cache', parseFloat(status.ArticleCacheMB));
@@ -128,9 +126,7 @@ class NZBDevice extends Homey.Device {
       await this.setCapabilityValue('remaining_size', Number(status.RemainingSizeMB));
       await this.setCapabilityValue('uptime', this._toTime(status.UpTimeSec));
 
-      const files = await this.api.listfiles().catch(err => {
-        return this.setUnavailable(this.homey.__(err.message));
-      });
+      const files = await this.api.listfiles();
 
       await this.setCapabilityValue('remaining_files', Object.keys(files).length);
 
@@ -167,11 +163,9 @@ class NZBDevice extends Homey.Device {
       return;
     }
 
-    const refreshInterval = seconds * 1000;
-
     this._refreshTimer = this.homey.setInterval(async () => {
       await this.syncDevice();
-    }, refreshInterval);
+    }, (seconds * 1000));
 
     this.log(`Refresh interval set to ${seconds} seconds`);
   }

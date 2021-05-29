@@ -17,8 +17,8 @@ class NZBDriver extends Homey.Driver {
       // Merge data with defaults
       data = this.mergeData(data);
 
-      const version = await new Api(data).version().catch(err => {
-        throw new Error(this.homey.__(err.message));
+      const version = await new Api(data, this.homey).version().catch(err => {
+        throw new Error(err.message);
       });
 
       if (Number(version) < this.constructor.MINIMUMVERSION) {
