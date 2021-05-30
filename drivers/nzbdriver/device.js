@@ -31,7 +31,7 @@ class NZBDevice extends Homey.Device {
         return;
       }
 
-      this.log(`Setting \`${name}\` set \`${oldSettings[name]}\` => \`${newSettings[name]}\``);
+      this.log(`Setting '${name}' set '${oldSettings[name]}' => '${newSettings[name]}'`);
 
       if (name === 'refresh_interval') {
         this.setRefreshTimer(newSettings[name]);
@@ -89,25 +89,24 @@ class NZBDevice extends Homey.Device {
   // Sync device data
   async syncDevice() {
     try {
-      const settings = this.getSettings();
-
-      const status = await this.homey.app.status(settings);
+      const _settings = this.getSettings();
+      const _status = await this.homey.app.status(_settings);
 
       // Capability values
-      await this.setCapabilityValue('article_cache', parseFloat(status.ArticleCacheMB));
-      await this.setCapabilityValue('average_rate', parseFloat(status.AverageDownloadRate / 1024000));
-      await this.setCapabilityValue('download_enabled', !status.DownloadPaused);
-      await this.setCapabilityValue('download_rate', parseFloat(status.DownloadRate / 1024000));
-      await this.setCapabilityValue('download_size', parseFloat(status.DownloadedSizeMB / 1024));
-      await this.setCapabilityValue('download_time', this.toTime(Number(status.DownloadTimeSec)));
-      await this.setCapabilityValue('free_disk_space', Math.floor(status.FreeDiskSpaceMB / 1024));
-      await this.setCapabilityValue('rate_limit', Number(status.DownloadLimit / 1024000));
-      await this.setCapabilityValue('remaining_size', Number(status.RemainingSizeMB));
-      await this.setCapabilityValue('uptime', this.toTime(status.UpTimeSec));
+      await this.setCapabilityValue('article_cache', parseFloat(_status.ArticleCacheMB));
+      await this.setCapabilityValue('average_rate', parseFloat(_status.AverageDownloadRate / 1024000));
+      await this.setCapabilityValue('download_enabled', !_status.DownloadPaused);
+      await this.setCapabilityValue('download_rate', parseFloat(_status.DownloadRate / 1024000));
+      await this.setCapabilityValue('download_size', parseFloat(_status.DownloadedSizeMB / 1024));
+      await this.setCapabilityValue('download_time', this.toTime(Number(_status.DownloadTimeSec)));
+      await this.setCapabilityValue('free_disk_space', Math.floor(_status.FreeDiskSpaceMB / 1024));
+      await this.setCapabilityValue('rate_limit', Number(_status.DownloadLimit / 1024000));
+      await this.setCapabilityValue('remaining_size', Number(_status.RemainingSizeMB));
+      await this.setCapabilityValue('uptime', this.toTime(_status.UpTimeSec));
 
-      const files = await this.homey.app.listfiles(settings);
+      const _files = await this.homey.app.listfiles(_settings);
 
-      await this.setCapabilityValue('remaining_files', Object.keys(files).length);
+      await this.setCapabilityValue('remaining_files', Object.keys(_files).length);
 
       if (!this.getAvailable()) {
         await this.setAvailable();
@@ -119,8 +118,7 @@ class NZBDevice extends Homey.Device {
 
   // Deleted
   onDeleted() {
-    this.homey.clearInterval(this._refreshTimer);
-    this._refreshTimer = null;
+    this.setRefreshTimer();
 
     this.log('Device is deleted');
   }
