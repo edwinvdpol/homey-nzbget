@@ -9,8 +9,10 @@ class NZBApp extends Homey.App {
   async onInit() {
     this.log('NZBApp is running...');
 
+    // Initiate API client
     this.client = new Api({ homey: this.homey });
 
+    // Register actions and condition flow cards
     this.registerActions();
     this.registerConditions();
 

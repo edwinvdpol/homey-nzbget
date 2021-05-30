@@ -26,7 +26,7 @@ class NZBDevice extends Homey.Device {
   // Settings changed
   async onSettings({ oldSettings, newSettings, changedKeys }) {
     changedKeys.forEach(name => {
-      // Do not log password
+      // Do not log password changes
       if (name === 'pass') {
         return;
       }

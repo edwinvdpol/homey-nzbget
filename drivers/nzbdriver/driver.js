@@ -13,14 +13,13 @@ class NZBDriver extends Homey.Driver {
 
     session.setHandler('connect', async data => {
       this.log('Connecting to server...');
-      this.log('DATA:', data);
 
       // Remove trailing slash
       if (data.host.slice(-1) === '/') {
         data.host = data.host.slice(0, -1);
       }
 
-      // Connection data
+      // Get connection data
       const connectData = this.connectData(data);
 
       // Get version
@@ -35,10 +34,10 @@ class NZBDriver extends Homey.Driver {
 
       data.version = version;
 
-      // Create device data
+      // Get create device data
       const createData = this.getCreateData(data);
 
-      // Emit create event
+      // Emit create device event
       await session.emit('create', createData);
     });
   }
