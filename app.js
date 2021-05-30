@@ -13,6 +13,17 @@ class NZBApp extends Homey.App {
 
     this.registerActions();
     this.registerConditions();
+
+    // Event listeners
+    this.homey.on('cpuwarn', () => {
+      this.log('-- CPU warning! --');
+    }).on('memwarn', () => {
+      this.log('-- Memory warning! --');
+    }).on('unload', () => {
+      this.client = null;
+
+      this.log('-- Unloaded! _o/ --');
+    });
   }
 
   // Register flowcard actions
