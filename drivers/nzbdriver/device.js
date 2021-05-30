@@ -120,6 +120,7 @@ class NZBDevice extends Homey.Device {
   // Deleted
   onDeleted() {
     this.homey.clearInterval(this._refreshTimer);
+    this._refreshTimer = null;
 
     this.log('Device is deleted');
   }
