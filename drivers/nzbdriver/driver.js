@@ -1,7 +1,7 @@
 'use strict';
 
 const Homey = require('homey');
-const Api = require('../../lib/Api');
+const { v4: uuidv4 } = require('uuid');
 
 class NZBDriver extends Homey.Driver {
 
@@ -13,27 +13,49 @@ class NZBDriver extends Homey.Driver {
 
     session.setHandler('connect', async data => {
       this.log('Connecting to server...');
+      this.log('DATA:', data);
 
-      // Merge data with defaults
-      data = this.mergeData(data);
+      // Remove trailing slash
+      if (data.host.slice(-1) === '/') {
+        data.host = data.host.slice(0, -1);
+      }
 
-      const version = await new Api(data, this.homey).version().catch(err => {
+      // Connection data
+      const connectData = this.connectData(data);
+
+      // Get version
+      const version = await this.homey.app.version(connectData).catch(err => {
         throw new Error(err.message);
       });
 
+      // Check if the version valid
       if (Number(version) < this.constructor.MINIMUMVERSION) {
         throw new Error(this.homey.__('api.version', { version }));
       }
 
-      await session.emit('create', {
-        name: `NZBGet v${version}`,
-        data,
-      });
+      data.version = version;
+
+      // Create device data
+      const createData = this.getCreateData(data);
+
+      // Emit create event
+      await session.emit('create', createData);
     });
   }
 
-  // Merge data with defaults
-  mergeData(data) {
+  // Get data to create the device
+  getCreateData(data) {
+    return {
+      name: `NZBGet v${data.version}`,
+      data: {
+        id: uuidv4(),
+      },
+      settings: this.connectData(data),
+    };
+  }
+
+  // Rerturn data, merged with defaults
+  connectData(data) {
     return {
       host: data.host || 'http://127.0.0.1',
       user: data.user || 'nzbget',

@@ -1,7 +1,6 @@
 'use strict';
 
 const Homey = require('homey');
-const Api = require('../../lib/Api');
 
 class NZBDevice extends Homey.Device {
 
@@ -9,11 +8,13 @@ class NZBDevice extends Homey.Device {
   async onInit() {
     this.log('Device is initiated');
 
+    // Migrate to credentials in settings
+    if (this.getSetting('user') === '-') {
+      await this.setSettings(this.getData());
+    }
+
     // Register capability listeners
     this.registerCapabilityListeners();
-
-    // Create API object
-    this.api = new Api(this.getData(), this.homey);
 
     // Sync device statistics
     await this.syncDevice();
@@ -25,26 +26,26 @@ class NZBDevice extends Homey.Device {
   // Settings changed
   async onSettings({ oldSettings, newSettings, changedKeys }) {
     changedKeys.forEach(name => {
+      // Do not log password
+      if (name === 'pass') {
+        return;
+      }
+
       this.log(`Setting \`${name}\` set \`${oldSettings[name]}\` => \`${newSettings[name]}\``);
 
       if (name === 'refresh_interval') {
         this.setRefreshTimer(newSettings[name]);
       }
     });
-  }
 
-  // Deleted
-  onDeleted() {
-    this.homey.clearInterval(this._refreshTimer);
-
-    this.log('Device is deleted');
+    await this.homey.app.version(newSettings);
   }
 
   // Pause download queue
   async pausedownload() {
     this.log('Pause download queue');
 
-    await this.api.pausedownload();
+    await this.homey.app.pausedownload(this.getSettings());
     await this.setCapabilityValue('download_enabled', false);
   }
 
@@ -52,7 +53,7 @@ class NZBDevice extends Homey.Device {
   async rate(args) {
     this.log(`Set download limit to ${args.download_rate} MB/s`);
 
-    await this.api.rate(args.download_rate);
+    await this.homey.app.rate(this.getSettings(), args.download_rate);
     await this.setCapabilityValue('rate_limit', args.download_rate);
   }
 
@@ -60,14 +61,14 @@ class NZBDevice extends Homey.Device {
   async reload() {
     this.log('Reload');
 
-    await this.api.reload();
+    await this.homey.app.reload(this.getSettings());
   }
 
   // Resume download queue
   async resumedownload() {
     this.log('Resume download queue');
 
-    await this.api.resumedownload();
+    await this.homey.app.resumedownload(this.getSettings());
     await this.setCapabilityValue('download_enabled', true);
   }
 
@@ -75,20 +76,22 @@ class NZBDevice extends Homey.Device {
   async scan() {
     this.log('Scan incoming directory for nzb-files');
 
-    await this.api.scan();
+    await this.homey.app.scan(this.getSettings());
   }
 
   // Shutdown server
   async shutdown() {
     this.log('Shutdown');
 
-    await this.api.shutdown();
+    await this.homey.app.shutdown(this.getSettings());
   }
 
   // Sync device data
   async syncDevice() {
     try {
-      const status = await this.api.status();
+      const settings = this.getSettings();
+
+      const status = await this.homey.app.status(settings);
 
       // Capability values
       await this.setCapabilityValue('article_cache', parseFloat(status.ArticleCacheMB));
@@ -96,13 +99,13 @@ class NZBDevice extends Homey.Device {
       await this.setCapabilityValue('download_enabled', !status.DownloadPaused);
       await this.setCapabilityValue('download_rate', parseFloat(status.DownloadRate / 1024000));
       await this.setCapabilityValue('download_size', parseFloat(status.DownloadedSizeMB / 1024));
-      await this.setCapabilityValue('download_time', this._toTime(Number(status.DownloadTimeSec)));
+      await this.setCapabilityValue('download_time', this.toTime(Number(status.DownloadTimeSec)));
       await this.setCapabilityValue('free_disk_space', Math.floor(status.FreeDiskSpaceMB / 1024));
       await this.setCapabilityValue('rate_limit', Number(status.DownloadLimit / 1024000));
       await this.setCapabilityValue('remaining_size', Number(status.RemainingSizeMB));
-      await this.setCapabilityValue('uptime', this._toTime(status.UpTimeSec));
+      await this.setCapabilityValue('uptime', this.toTime(status.UpTimeSec));
 
-      const files = await this.api.listfiles();
+      const files = await this.homey.app.listfiles(settings);
 
       await this.setCapabilityValue('remaining_files', Object.keys(files).length);
 
@@ -112,6 +115,13 @@ class NZBDevice extends Homey.Device {
     } catch (err) {
       await this.setUnavailable(err.message);
     }
+  }
+
+  // Deleted
+  onDeleted() {
+    this.homey.clearInterval(this._refreshTimer);
+
+    this.log('Device is deleted');
   }
 
   // Register capability listeners
@@ -146,7 +156,7 @@ class NZBDevice extends Homey.Device {
   }
 
   // Convert seconds to time
-  _toTime(sec) {
+  toTime(sec) {
     const secNum = parseInt(sec, 10);
     let hours = Math.floor(secNum / 3600);
     let minutes = Math.floor((secNum - (hours * 3600)) / 60);

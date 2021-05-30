@@ -443,6 +443,60 @@
               }
             }
           ]
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "Server settings",
+            "nl": "Server instellingen"
+          },
+          "children": [
+            {
+              "id": "host",
+              "type": "text",
+              "label": {
+                "en": "URL"
+              },
+              "value": "-"
+            },
+            {
+              "id": "port",
+              "type": "number",
+              "label": {
+                "en": "Port",
+                "nl": "Poort"
+              },
+              "value": 6789,
+              "min": 1
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "Login details",
+            "nl": "Inloggegevens"
+          },
+          "children": [
+            {
+              "id": "user",
+              "type": "text",
+              "label": {
+                "en": "Username",
+                "nl": "Gebruikersnaam"
+              },
+              "value": "-"
+            },
+            {
+              "id": "pass",
+              "type": "password",
+              "label": {
+                "en": "Password",
+                "nl": "Wachtwoord"
+              },
+              "value": "-"
+            }
+          ]
         }
       ]
     }

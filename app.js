@@ -1,6 +1,7 @@
 'use strict';
 
 const Homey = require('homey');
+const Api = require('./lib/Api');
 
 class NZBApp extends Homey.App {
 
@@ -8,12 +9,14 @@ class NZBApp extends Homey.App {
   async onInit() {
     this.log('NZBApp is running...');
 
-    await this.registerActions();
-    await this.registerConditions();
+    this.client = new Api({ homey: this.homey });
+
+    this.registerActions();
+    this.registerConditions();
   }
 
   // Register flowcard actions
-  async registerActions() {
+  registerActions() {
     // ... then pause download queue ...
     this.homey.flow.getActionCard('pausedownload').registerRunListener(async args => {
       return args.device.pausedownload();
@@ -46,11 +49,63 @@ class NZBApp extends Homey.App {
   }
 
   // Register flowcard conditions
-  async registerConditions() {
+  registerConditions() {
     // ... and download queue is active...
     this.homey.flow.getConditionCard('download_enabled').registerRunListener(async args => {
       return args.device.getCapabilityValue('download_enabled') === true;
     });
+  }
+
+  // Request for file’s list of a group.
+  listfiles(data, id = 0) {
+    if (id > 0) {
+      return this.client.call('listfiles', data, [0, 0, id]);
+    }
+
+    return this.client.call('listfiles', data);
+  }
+
+  // Pause download queue
+  pausedownload(data) {
+    return this.client.call('pausedownload', data);
+  }
+
+  // Set download speed limit in MB/second.
+  rate(data, limit = 0) {
+    // KB/s => MB/s
+    limit = Number(limit * 1000);
+
+    return this.client.call('rate', data, [limit]);
+  }
+
+  // Reload
+  reload(data) {
+    return this.client.call('reload', data);
+  }
+
+  // Resume (previously paused) download queue.
+  resumedownload(data) {
+    return this.client.call('resumedownload', data);
+  }
+
+  // Request rescanning of incoming directory for nzb-files.
+  scan(data) {
+    return this.client.call('scan', data);
+  }
+
+  // Shutdown
+  shutdown(data) {
+    return this.client.call('shutdown', data);
+  }
+
+  // Status
+  status(data) {
+    return this.client.call('status', data);
+  }
+
+  // Version
+  version(data) {
+    return this.client.call('version', data);
   }
 
 }
