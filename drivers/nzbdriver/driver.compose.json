@@ -81,7 +81,7 @@
     {
       "type": "group",
       "label": {
-        "en": "Login details",
+        "en": "Login credentials",
         "nl": "Inloggegevens"
       },
       "children": [
