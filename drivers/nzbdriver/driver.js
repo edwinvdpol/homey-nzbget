@@ -19,11 +19,11 @@ class NZBDriver extends Homey.Driver {
         data.host = data.host.slice(0, -1);
       }
 
-      // Get connection data
-      const connectData = this.connectData(data);
+      // Get connection settings
+      const connectSettings = this.getConnectSettings(data);
 
       // Get version
-      const version = await this.homey.app.version(connectData).catch(err => {
+      const version = await this.homey.app.version(connectSettings).catch(err => {
         throw new Error(err.message);
       });
 
@@ -42,6 +42,16 @@ class NZBDriver extends Homey.Driver {
     });
   }
 
+  // Get connect data, merged with defaults
+  getConnectSettings(data) {
+    return {
+      host: data.host || 'http://127.0.0.1',
+      user: data.user || 'nzbget',
+      pass: data.pass || 'tegbzn6789',
+      port: data.port || 6789,
+    };
+  }
+
   // Get data to create the device
   getCreateData(data) {
     return {
@@ -49,17 +59,7 @@ class NZBDriver extends Homey.Driver {
       data: {
         id: uuidv4(),
       },
-      settings: this.connectData(data),
-    };
-  }
-
-  // Rerturn data, merged with defaults
-  connectData(data) {
-    return {
-      host: data.host || 'http://127.0.0.1',
-      user: data.user || 'nzbget',
-      pass: data.pass || 'tegbzn6789',
-      port: data.port || 6789,
+      settings: this.getConnectSettings(data),
     };
   }
 
