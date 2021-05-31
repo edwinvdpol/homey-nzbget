@@ -46,9 +46,9 @@ class NZBDriver extends Homey.Driver {
   getConnectSettings(data) {
     return {
       host: data.host || 'http://127.0.0.1',
+      port: Number(data.port) || 6789,
       user: data.user || 'nzbget',
       pass: data.pass || 'tegbzn6789',
-      port: data.port || 6789,
     };
   }
 
