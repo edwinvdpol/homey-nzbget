@@ -10,7 +10,7 @@ class NZBDevice extends Homey.Device {
 
     // Migrate to credentials in settings
     if (this.getSetting('user') === '-') {
-      await this.setSettings(this.getData());
+      await this.migrateSettings();
     }
 
     // Register capability listeners
@@ -113,6 +113,30 @@ class NZBDevice extends Homey.Device {
       }
     } catch (err) {
       await this.setUnavailable(err.message);
+    }
+  }
+
+  // Migrate data to settings
+  async migrateSettings() {
+    const data = this.getData();
+    const { host } = data;
+
+    if (!data.host.startsWith('https://') && !data.host.startsWith('http://')) {
+      data.host = `https://${host}`;
+
+      await this.homey.app.version(data).catch(async () => {
+        data.host = `http://${host}`;
+
+        await this.homey.app.version(data).catch(async err => {
+          data.host = host;
+
+          await this.setSettings(data);
+
+          return this.setUnavailable(err.message);
+        });
+      });
+
+      await this.setSettings(data);
     }
   }
 
