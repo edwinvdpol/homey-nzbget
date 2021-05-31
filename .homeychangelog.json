@@ -10,5 +10,9 @@
   "1.1.1": {
     "en": "Updated to Homey SDK 3 and added flowcards",
     "nl": "Geupdate naar Homey SDK 3 en flowcards toegevoegd"
+  },
+  "1.2.0": {
+    "en": "Added settings to edit server settings and login credentials. Memory usage is optimized.",
+    "nl": "Instellingen toegevoegd om serverinstellingen en inloggegevens te bewerken. Geheugengebruik is geoptimaliseerd."
   }
 }
