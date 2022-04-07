@@ -11,7 +11,7 @@ class NZBDriver extends Homey.Driver {
   onPair(session) {
     this.log('Pairing started');
 
-    session.setHandler('connect', async data => {
+    session.setHandler('connect', async (data) => {
       this.log('Connecting to server...');
 
       // Remove trailing slash
@@ -23,7 +23,7 @@ class NZBDriver extends Homey.Driver {
       const connectSettings = this.getConnectSettings(data);
 
       // Get version
-      const version = await this.homey.app.version(connectSettings).catch(err => {
+      const version = await this.homey.app.client.call('version', connectSettings).catch(err => {
         throw new Error(err.message);
       });
 

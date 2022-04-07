@@ -4,9 +4,15 @@ const Homey = require('homey');
 
 class NZBDevice extends Homey.Device {
 
-  // Initialized
+  /*
+  |-----------------------------------------------------------------------------
+  | Device events
+  |-----------------------------------------------------------------------------
+  */
+
+  // Device initialized
   async onInit() {
-    this.log('Device is initiated');
+    this.log('Device initialized');
 
     // Migrate to credentials in settings
     if (this.getSetting('user') === '-') {
@@ -14,13 +20,21 @@ class NZBDevice extends Homey.Device {
     }
 
     // Register capability listeners
-    this.registerCapabilityListeners();
+    await this.registerCapabilityListeners();
 
     // Sync device statistics
     await this.syncDevice();
 
     // Refresh timer
-    this.setRefreshTimer(this.getSetting('refresh_interval'));
+    this.setRefreshTimer(this.getSetting('refresh_interval')).catch(this.error);
+  }
+
+  // Device uninitialized
+  async onUninit() {
+    this.log('Device uninitialized');
+
+    // Stop timer
+    this.setRefreshTimer().catch(this.error);
   }
 
   // Settings changed
@@ -34,85 +48,141 @@ class NZBDevice extends Homey.Device {
       this.log(`Setting '${name}' set '${oldSettings[name]}' => '${newSettings[name]}'`);
 
       if (name === 'refresh_interval') {
-        this.setRefreshTimer(newSettings[name]);
+        this.setRefreshTimer(newSettings[name]).catch(this.error);
       }
     });
 
-    await this.homey.app.version(newSettings);
+    await this.homey.app.client.call('version', newSettings);
   }
+
+  // Deleted
+  onDeleted() {
+    this.log('Device is deleted');
+
+    this.setRefreshTimer().catch(this.error);
+  }
+
+  /*
+  |-----------------------------------------------------------------------------
+  | Device update functions
+  |-----------------------------------------------------------------------------
+  */
 
   // Pause download queue
   async pausedownload() {
     this.log('Pause download queue');
 
-    await this.homey.app.pausedownload(this.getSettings());
-    await this.setCapabilityValue('download_enabled', false);
+    await this.homey.app.client.call('pausedownload', this.getSettings());
+    this.setCapabilityValue('download_enabled', false).catch(this.error);
   }
 
-  // Set download speed limit
-  async rate(args) {
-    this.log(`Set download limit to ${args.download_rate} MB/s`);
+  // Request for file’s list of a group.
+  async listfiles(id = 0) {
+    if (id > 0) {
+      return this.homey.app.client.call('listfiles', this.getSettings(), [0, 0, id]);
+    } else {
+      return this.homey.app.client.call('listfiles', this.getSettings());
+    }
+  }
 
-    await this.homey.app.rate(this.getSettings(), args.download_rate);
-    await this.setCapabilityValue('rate_limit', args.download_rate);
+  // Set download speed limit (mb/s)
+  async rate(download_rate) {
+    const limit = Number(download_rate * 1000);
+
+    this.log(`Set download limit to ${limit} MB/s`);
+
+    await this.homey.app.client.call('rate', this.getSettings(), [limit]);
+
+    this.setCapabilityValue('rate_limit', limit).catch(this.error);
   }
 
   // Reload server
   async reload() {
     this.log('Reload');
 
-    await this.homey.app.reload(this.getSettings());
+    await this.homey.app.client.call('reload', this.getSettings());
   }
 
   // Resume download queue
   async resumedownload() {
     this.log('Resume download queue');
 
-    await this.homey.app.resumedownload(this.getSettings());
-    await this.setCapabilityValue('download_enabled', true);
+    await this.homey.app.client.call('resumedownload', this.getSettings());
+
+    this.setCapabilityValue('download_enabled', true).catch(this.error);
   }
 
   // Scan incoming directory for nzb-files
   async scan() {
     this.log('Scan incoming directory for nzb-files');
 
-    await this.homey.app.scan(this.getSettings());
+    await this.homey.app.client.call('scan', this.getSettings());
   }
 
   // Shutdown server
   async shutdown() {
     this.log('Shutdown');
 
-    await this.homey.app.shutdown(this.getSettings());
+    await this.homey.app.client.call('shutdown', this.getSettings());
   }
 
   // Sync device data
   async syncDevice() {
     try {
-      const _settings = this.getSettings();
-      const _status = await this.homey.app.status(_settings);
+      const settings = this.getSettings();
+      const status = await this.homey.app.client.call('status', settings);
 
       // Capability values
-      await this.setCapabilityValue('article_cache', parseFloat(_status.ArticleCacheMB));
-      await this.setCapabilityValue('average_rate', parseFloat(_status.AverageDownloadRate / 1024000));
-      await this.setCapabilityValue('download_enabled', !_status.DownloadPaused);
-      await this.setCapabilityValue('download_rate', parseFloat(_status.DownloadRate / 1024000));
-      await this.setCapabilityValue('download_size', parseFloat(_status.DownloadedSizeMB / 1024));
-      await this.setCapabilityValue('download_time', this.toTime(Number(_status.DownloadTimeSec)));
-      await this.setCapabilityValue('free_disk_space', Math.floor(_status.FreeDiskSpaceMB / 1024));
-      await this.setCapabilityValue('rate_limit', Number(_status.DownloadLimit / 1024000));
-      await this.setCapabilityValue('remaining_size', Number(_status.RemainingSizeMB));
-      await this.setCapabilityValue('uptime', this.toTime(_status.UpTimeSec));
+      if (status.hasOwnProperty('ArticleCacheMB')) {
+        this.setCapabilityValue('article_cache', parseFloat(status.ArticleCacheMB)).catch(this.error);
+      }
 
-      const _files = await this.homey.app.listfiles(_settings);
+      if (status.hasOwnProperty('AverageDownloadRate')) {
+        this.setCapabilityValue('average_rate', parseFloat(status.AverageDownloadRate / 1024000)).catch(this.error);
+      }
 
-      await this.setCapabilityValue('remaining_files', Object.keys(_files).length);
+      if (status.hasOwnProperty('DownloadPaused')) {
+        this.setCapabilityValue('download_enabled', !status.DownloadPaused).catch(this.error);
+      }
+
+      if (status.hasOwnProperty('DownloadRate')) {
+        this.setCapabilityValue('download_rate', parseFloat(status.DownloadRate / 1024000)).catch(this.error);
+      }
+
+      if (status.hasOwnProperty('DownloadedSizeMB')) {
+        this.setCapabilityValue('download_size', parseFloat(status.DownloadedSizeMB / 1024)).catch(this.error);
+      }
+
+      if (status.hasOwnProperty('DownloadTimeSec')) {
+        this.setCapabilityValue('download_time', this.toTime(Number(status.DownloadTimeSec))).catch(this.error);
+      }
+
+      if (status.hasOwnProperty('FreeDiskSpaceMB')) {
+        this.setCapabilityValue('free_disk_space', Math.floor(status.FreeDiskSpaceMB / 1024)).catch(this.error);
+      }
+
+      if (status.hasOwnProperty('DownloadLimit')) {
+        this.setCapabilityValue('rate_limit', Number(status.DownloadLimit / 1024000)).catch(this.error);
+      }
+
+      if (status.hasOwnProperty('RemainingSizeMB')) {
+        this.setCapabilityValue('remaining_size', Number(status.RemainingSizeMB)).catch(this.error);
+      }
+
+      if (status.hasOwnProperty('UpTimeSec')) {
+        this.setCapabilityValue('uptime', this.toTime(status.UpTimeSec)).catch(this.error);
+      }
+
+      const files = await this.listfiles();
+
+      this.setCapabilityValue('remaining_files', Object.keys(files).length).catch(this.error);
 
       if (!this.getAvailable()) {
-        await this.setAvailable();
+        this.setAvailable().catch(this.error);
       }
     } catch (err) {
-      await this.setUnavailable(err.message);
+      this.error(err);
+      this.setUnavailable(err.message).catch(this.error);
     }
   }
 
@@ -124,45 +194,45 @@ class NZBDevice extends Homey.Device {
     if (!data.host.startsWith('https://') && !data.host.startsWith('http://')) {
       data.host = `https://${host}`;
 
-      await this.homey.app.version(data).catch(async () => {
+      await this.homey.app.client.call('version', data).catch(async () => {
         data.host = `http://${host}`;
 
-        await this.homey.app.version(data).catch(async err => {
+        await this.homey.app.client.call('version', data).catch(async err => {
           data.host = host;
 
           await this.setSettings(data);
 
-          return this.setUnavailable(err.message);
+          this.setUnavailable(err.message).catch(this.error)
         });
       });
 
-      await this.setSettings(data);
+      this.setSettings(data).catch(this.error);
     }
   }
 
-  // Deleted
-  onDeleted() {
-    this.setRefreshTimer();
-
-    this.log('Device is deleted');
-  }
+  /*
+  |-----------------------------------------------------------------------------
+  | Support functions
+  |-----------------------------------------------------------------------------
+  */
 
   // Register capability listeners
-  registerCapabilityListeners() {
-    this.registerCapabilityListener('download_enabled', async enabled => {
+  async registerCapabilityListeners() {
+    this.registerCapabilityListener('download_enabled', async (enabled) => {
       if (enabled) {
-        return this.resumedownload();
+        await this.resumedownload();
+      } else {
+        await this.pausedownload();
       }
-
-      return this.pausedownload();
     });
   }
 
   // Refresh interval timer
-  setRefreshTimer(seconds = 0) {
-    if (this._refreshTimer) {
-      this.homey.clearInterval(this._refreshTimer);
-      this._refreshTimer = null;
+  async setRefreshTimer(seconds = 0) {
+    if (this.refreshTimer) {
+      this.homey.clearInterval(this.refreshTimer);
+
+      this.refreshTimer = null;
     }
 
     if (seconds === 0) {
@@ -171,7 +241,7 @@ class NZBDevice extends Homey.Device {
       return;
     }
 
-    this._refreshTimer = this.homey.setInterval(async () => {
+    this.refreshTimer = this.homey.setInterval(async () => {
       await this.syncDevice();
     }, (seconds * 1000));
 
