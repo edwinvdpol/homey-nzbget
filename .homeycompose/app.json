@@ -61,5 +61,6 @@
       }
     }
   },
-  "homepage": "https://nzbget.net"
+  "homepage": "https://nzbget.net",
+  "support": "mailto:developer@edwinvandepol.nl"
 }

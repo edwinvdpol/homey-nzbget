@@ -3,6 +3,12 @@
   "name": {
     "en": "Server"
   },
+  "platforms": [
+    "local"
+  ],
+  "connectivity": [
+    "lan"
+  ],
   "class": "other",
   "capabilities": [
     "download_enabled",
@@ -23,8 +29,8 @@
     }
   ],
   "images": {
-    "large": "{{driverPath}}/assets/images/large.png",
-    "small": "{{driverPath}}/assets/images/small.png"
+    "large": "{{driverAssetsPath}}/images/large.png",
+    "small": "{{driverAssetsPath}}/images/small.png"
   },
   "settings": [
     {

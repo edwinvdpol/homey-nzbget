@@ -63,6 +63,7 @@
     }
   },
   "homepage": "https://nzbget.net",
+  "support": "mailto:developer@edwinvandepol.nl",
   "flow": {
     "triggers": [
       {
@@ -436,6 +437,12 @@
       "name": {
         "en": "Server"
       },
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
       "class": "other",
       "capabilities": [
         "download_enabled",
