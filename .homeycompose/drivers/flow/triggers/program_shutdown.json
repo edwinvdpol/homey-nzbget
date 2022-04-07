@@ -1,0 +1,10 @@
+{
+  "title": {
+    "en": "NZBGet was shut down",
+    "nl": "NZBGet werd afgesloten"
+  },
+  "hint": {
+    "en": "This flowcard triggers when NZBGet was shutdown through Homey.",
+    "nl": "Deze flowcard wordt geactiveerd wanneer NZBGet werd afgesloten via Homey."
+  }
+}

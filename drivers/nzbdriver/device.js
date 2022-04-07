@@ -101,6 +101,14 @@ class NZBDevice extends Homey.Device {
     this.log('Reload');
 
     await this.homey.app.client.call('reload', this.getSettings());
+
+    // Wait until the driver is ready
+    await this.driver.ready();
+
+    let device = this;
+
+    // Trigger program reloaded flow card
+    await this.driver.programReloadedTrigger.trigger(device);
   }
 
   // Resume download queue
@@ -124,6 +132,14 @@ class NZBDevice extends Homey.Device {
     this.log('Shutdown');
 
     await this.homey.app.client.call('shutdown', this.getSettings());
+
+    // Wait until the driver is ready
+    await this.driver.ready();
+
+    let device = this;
+
+    // Trigger program shutdown flow card
+    await this.driver.programShutdownTrigger.trigger(device);
   }
 
   // Sync device data
@@ -233,11 +249,11 @@ class NZBDevice extends Homey.Device {
       this.homey.clearInterval(this.refreshTimer);
 
       this.refreshTimer = null;
+
+      this.log('Refresh timer stopped');
     }
 
     if (seconds === 0) {
-      this.log('Refresh timer stopped');
-
       return;
     }
 

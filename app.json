@@ -206,6 +206,42 @@
         ]
       },
       {
+        "id": "program_reloaded",
+        "title": {
+          "en": "NZBGet was reloaded",
+          "nl": "NZBGet werd herladen"
+        },
+        "hint": {
+          "en": "This flowcard triggers when NZBGet was reloaded through Homey.",
+          "nl": "Deze flowcard wordt geactiveerd wanneer NZBGet werd herladen via Homey."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=nzbdriver"
+          }
+        ]
+      },
+      {
+        "id": "program_shutdown",
+        "title": {
+          "en": "NZBGet was shut down",
+          "nl": "NZBGet werd afgesloten"
+        },
+        "hint": {
+          "en": "This flowcard triggers when NZBGet was shutdown through Homey.",
+          "nl": "Deze flowcard wordt geactiveerd wanneer NZBGet werd afgesloten via Homey."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=nzbdriver"
+          }
+        ]
+      },
+      {
         "id": "remaining_files_changed",
         "title": {
           "en": "Download queue changed",

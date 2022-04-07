@@ -7,6 +7,14 @@ class NZBDriver extends Homey.Driver {
 
   static MINIMUMVERSION = 15;
 
+  // Driver initialized
+  async onInit() {
+    this.log('Driver initialized');
+
+    // Register flow cards
+    await this.registerDeviceTriggerFlowCards();
+  }
+
   // Pairing
   onPair(session) {
     this.log('Pairing started');
@@ -61,6 +69,15 @@ class NZBDriver extends Homey.Driver {
       },
       settings: this.getConnectSettings(data),
     };
+  }
+
+  // Register device trigger flow cards
+  async registerDeviceTriggerFlowCards() {
+    // When NZBGet was reloaded ...
+    this.programReloadedTrigger = this.homey.flow.getDeviceTriggerCard('program_reloaded');
+
+    // When NZBGet was shut down ...
+    this.programShutdownTrigger = this.homey.flow.getDeviceTriggerCard('program_shutdown');
   }
 
 }

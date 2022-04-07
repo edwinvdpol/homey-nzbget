@@ -1,0 +1,10 @@
+{
+  "title": {
+    "en": "NZBGet was reloaded",
+    "nl": "NZBGet werd herladen"
+  },
+  "hint": {
+    "en": "This flowcard triggers when NZBGet was reloaded through Homey.",
+    "nl": "Deze flowcard wordt geactiveerd wanneer NZBGet werd herladen via Homey."
+  }
+}

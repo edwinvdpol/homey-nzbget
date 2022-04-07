@@ -50,6 +50,12 @@
       "$extends": "rate_limit_changed"
     },
     {
+      "$extends": "program_reloaded"
+    },
+    {
+      "$extends": "program_shutdown"
+    },
+    {
       "$extends": "remaining_files_changed"
     },
     {
