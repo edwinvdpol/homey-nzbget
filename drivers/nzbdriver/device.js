@@ -29,14 +29,6 @@ class NZBDevice extends Homey.Device {
     this.setRefreshTimer(this.getSetting('refresh_interval')).catch(this.error);
   }
 
-  // Device uninitialized
-  async onUninit() {
-    this.log('Device uninitialized');
-
-    // Stop timer
-    this.setRefreshTimer().catch(this.error);
-  }
-
   // Settings changed
   async onSettings({ oldSettings, newSettings, changedKeys }) {
     changedKeys.forEach(name => {
@@ -108,7 +100,7 @@ class NZBDevice extends Homey.Device {
     let device = this;
 
     // Trigger program reloaded flow card
-    await this.driver.programReloadedTrigger.trigger(device);
+    await this.homey.app.flow.reloadedTrigger.trigger(device);
   }
 
   // Resume download queue
@@ -139,7 +131,7 @@ class NZBDevice extends Homey.Device {
     let device = this;
 
     // Trigger program shutdown flow card
-    await this.driver.programShutdownTrigger.trigger(device);
+    await this.homey.app.flow.shutdownTrigger.trigger(device);
   }
 
   // Sync device data
