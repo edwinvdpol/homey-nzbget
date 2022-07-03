@@ -18,7 +18,11 @@
     "type": "git",
     "url": "https://github.com/edwinvdpol/net.nzbget.git"
   },
+  "engines": {
+    "node": ">=12.16.1"
+  },
   "dependencies": {
+    "abort-controller": "^3.0.0",
     "node-fetch": "^2.6.7",
     "uuid": "^8.3.2"
   },
