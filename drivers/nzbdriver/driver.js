@@ -1,11 +1,9 @@
 'use strict';
 
 const Homey = require('homey');
-const { v4: uuidv4 } = require('uuid');
+const {v4: uuidv4} = require('uuid');
 
 class NZBDriver extends Homey.Driver {
-
-  static MINIMUMVERSION = 15;
 
   // Driver initialized
   async onInit() {
@@ -17,7 +15,7 @@ class NZBDriver extends Homey.Driver {
     this.log('Pairing started');
 
     session.setHandler('connect', async (data) => {
-      this.log('Connecting to server...');
+      this.log('Connecting to server');
 
       // Remove trailing slash
       if (data.host.slice(-1) === '/') {
@@ -25,16 +23,14 @@ class NZBDriver extends Homey.Driver {
       }
 
       // Get connection settings
-      const connectSettings = this.getConnectSettings(data);
+      const settings = this.getConnectSettings(data);
 
       // Get version
-      const version = await this.homey.app.client.call('version', connectSettings).catch(err => {
-        throw new Error(err.message);
-      });
+      const version = await this.homey.app.client.call('version', settings);
 
       // Check if the version valid
-      if (Number(version) < this.constructor.MINIMUMVERSION) {
-        throw new Error(this.homey.__('api.version', { version }));
+      if (Number(version) < 15) {
+        throw new Error(this.homey.__('api.version', {version}));
       }
 
       data.version = version;
@@ -53,7 +49,7 @@ class NZBDriver extends Homey.Driver {
       host: data.host || 'http://127.0.0.1',
       port: Number(data.port) || 6789,
       user: data.user || 'nzbget',
-      pass: data.pass || 'tegbzn6789',
+      pass: data.pass || 'tegbzn6789'
     };
   }
 
@@ -62,9 +58,9 @@ class NZBDriver extends Homey.Driver {
     return {
       name: `NZBGet v${data.version}`,
       data: {
-        id: uuidv4(),
+        id: uuidv4()
       },
-      settings: this.getConnectSettings(data),
+      settings: this.getConnectSettings(data)
     };
   }
 
