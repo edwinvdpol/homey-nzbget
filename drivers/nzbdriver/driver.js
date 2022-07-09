@@ -1,14 +1,8 @@
 'use strict';
 
-const Homey = require('homey');
-const {v4: uuidv4} = require('uuid');
+const Driver = require('../../lib/Driver');
 
-class NZBDriver extends Homey.Driver {
-
-  // Driver initialized
-  async onInit() {
-    this.log('Driver initialized');
-  }
+class NZBDriver extends Driver {
 
   // Pairing
   onPair(session) {
@@ -35,33 +29,9 @@ class NZBDriver extends Homey.Driver {
 
       data.version = version;
 
-      // Get create device data
-      const createData = this.getCreateData(data);
-
       // Emit create device event
-      await session.emit('create', createData);
+      await session.emit('create', this.getDeviceData(data));
     });
-  }
-
-  // Get connect data, merged with defaults
-  getConnectSettings(data) {
-    return {
-      host: data.host || 'http://127.0.0.1',
-      port: Number(data.port) || 6789,
-      user: data.user || 'nzbget',
-      pass: data.pass || 'tegbzn6789'
-    };
-  }
-
-  // Get data to create the device
-  getCreateData(data) {
-    return {
-      name: `NZBGet v${data.version}`,
-      data: {
-        id: uuidv4()
-      },
-      settings: this.getConnectSettings(data)
-    };
   }
 
 }
