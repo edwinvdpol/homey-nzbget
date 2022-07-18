@@ -1,6 +1,7 @@
 'use strict';
 
 const Device = require('../../lib/Device');
+const {filled} = require('../../lib/Utils');
 
 class NZBDevice extends Device {
 
@@ -19,47 +20,47 @@ class NZBDevice extends Device {
 
   // Set device data
   handleSyncData(data) {
-    if (data.hasOwnProperty('ArticleCacheMB')) {
+    if (filled(data.ArticleCacheMB)) {
       this.setCapabilityValue('article_cache', parseFloat(data.ArticleCacheMB)).catch(this.error);
     }
 
-    if (data.hasOwnProperty('AverageDownloadRate')) {
+    if (filled(data.AverageDownloadRate)) {
       this.setCapabilityValue('average_rate', parseFloat(data.AverageDownloadRate / 1024000)).catch(this.error);
     }
 
-    if (data.hasOwnProperty('DownloadPaused')) {
+    if (filled(data.DownloadPaused)) {
       this.setCapabilityValue('download_enabled', !data.DownloadPaused).catch(this.error);
     }
 
-    if (data.hasOwnProperty('DownloadRate')) {
+    if (filled(data.DownloadRate)) {
       this.setCapabilityValue('download_rate', parseFloat(data.DownloadRate / 1024000)).catch(this.error);
     }
 
-    if (data.hasOwnProperty('DownloadedSizeMB')) {
+    if (filled(data.DownloadedSizeMB)) {
       this.setCapabilityValue('download_size', parseFloat(data.DownloadedSizeMB / 1024)).catch(this.error);
     }
 
-    if (data.hasOwnProperty('DownloadTimeSec')) {
+    if (filled(data.DownloadTimeSec)) {
       this.setCapabilityValue('download_time', this.toTime(Number(data.DownloadTimeSec))).catch(this.error);
     }
 
-    if (data.hasOwnProperty('FreeDiskSpaceMB')) {
+    if (filled(data.FreeDiskSpaceMB)) {
       this.setCapabilityValue('free_disk_space', Math.floor(data.FreeDiskSpaceMB / 1024)).catch(this.error);
     }
 
-    if (data.hasOwnProperty('DownloadLimit')) {
+    if (filled(data.DownloadLimit)) {
       this.setCapabilityValue('rate_limit', Number(data.DownloadLimit / 1024000)).catch(this.error);
     }
 
-    if (data.hasOwnProperty('RemainingSizeMB')) {
+    if (filled(data.RemainingSizeMB)) {
       this.setCapabilityValue('remaining_size', Number(data.RemainingSizeMB)).catch(this.error);
     }
 
-    if (data.hasOwnProperty('UpTimeSec')) {
+    if (filled(data.UpTimeSec)) {
       this.setCapabilityValue('uptime', this.toTime(data.UpTimeSec)).catch(this.error);
     }
 
-    if (data.hasOwnProperty('Files')) {
+    if (filled(data.Files)) {
       this.setCapabilityValue('remaining_files', Object.keys(data.Files).length).catch(this.error);
     }
 
@@ -136,6 +137,30 @@ class NZBDevice extends Device {
     await this.homey.app.flow.shutdownTrigger.trigger(device);
   }
 
+  /*
+  | Support functions
+  */
+
+  // Convert seconds to time
+  toTime(sec) {
+    const secNum = parseInt(sec, 10);
+    let hours = Math.floor(secNum / 3600);
+    let minutes = Math.floor((secNum - (hours * 3600)) / 60);
+    let seconds = secNum - (hours * 3600) - (minutes * 60);
+
+    if (hours < 10) {
+      hours = `0${hours}`;
+    }
+
+    if (minutes < 10) {
+      minutes = `0${minutes}`;
+    }
+    if (seconds < 10) {
+      seconds = `0${seconds}`;
+    }
+
+    return `${hours}:${minutes}:${seconds}`;
+  }
 }
 
 module.exports = NZBDevice;
