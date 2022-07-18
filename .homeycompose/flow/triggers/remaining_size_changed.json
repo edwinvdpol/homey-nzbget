@@ -6,5 +6,12 @@
   "hint": {
     "en": "This flowcard triggers when the download remaining has changed.",
     "nl": "Deze flowcard wordt geactiveerd wanneer het nog te downloaden veranderd is."
-  }
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=nzbdriver"
+    }
+  ]
 }

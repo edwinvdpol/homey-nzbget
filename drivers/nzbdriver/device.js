@@ -20,6 +20,8 @@ class NZBDevice extends Device {
 
   // Set device data
   handleSyncData(data) {
+    this.log('Update device', this.getData().id, JSON.stringify(data));
+
     if (filled(data.ArticleCacheMB)) {
       this.setCapabilityValue('article_cache', parseFloat(data.ArticleCacheMB)).catch(this.error);
     }
@@ -60,9 +62,7 @@ class NZBDevice extends Device {
       this.setCapabilityValue('uptime', this.toTime(data.UpTimeSec)).catch(this.error);
     }
 
-    if (filled(data.Files)) {
-      this.setCapabilityValue('remaining_files', Object.keys(data.Files).length).catch(this.error);
-    }
+    this.setCapabilityValue('remaining_files', Object.keys(data.Files).length).catch(this.error);
 
     this.setAvailable().catch(this.error);
   }

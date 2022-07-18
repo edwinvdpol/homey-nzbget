@@ -6,5 +6,12 @@
   "hint": {
     "en": "This flowcard triggers when the download queue was pauzed.",
     "nl": "Deze flowcard wordt geactiveerd wanneer de downloadwachtrij gepauzeerd werd."
-  }
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=nzbdriver"
+    }
+  ]
 }

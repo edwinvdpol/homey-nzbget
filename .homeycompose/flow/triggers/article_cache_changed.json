@@ -6,5 +6,12 @@
   "hint": {
     "en": "This flowcard triggers when the article cache has changed.",
     "nl": "Deze flowcard wordt geactiveerd wanneer de artikelcache veranderd is."
-  }
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=nzbdriver"
+    }
+  ]
 }

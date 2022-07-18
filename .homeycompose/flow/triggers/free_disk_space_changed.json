@@ -6,5 +6,12 @@
   "hint": {
     "en": "This flowcard triggers when the free disk space has changed.",
     "nl": "Deze flowcard wordt geactiveerd wanneer de vrije schijfruimte veranderd is."
-  }
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=nzbdriver"
+    }
+  ]
 }

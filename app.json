@@ -67,7 +67,6 @@
   "flow": {
     "triggers": [
       {
-        "id": "article_cache_changed",
         "title": {
           "en": "Article cache has changed",
           "nl": "Artikelcache is veranderd"
@@ -82,10 +81,10 @@
             "name": "device",
             "filter": "driver_id=nzbdriver"
           }
-        ]
+        ],
+        "id": "article_cache_changed"
       },
       {
-        "id": "average_rate_changed",
         "title": {
           "en": "Average speed changed",
           "nl": "Gemiddelde snelheid is veranderd"
@@ -100,10 +99,10 @@
             "name": "device",
             "filter": "driver_id=nzbdriver"
           }
-        ]
+        ],
+        "id": "average_rate_changed"
       },
       {
-        "id": "download_enabled_false",
         "title": {
           "en": "Download queue just paused",
           "nl": "Downloadwachtrij werd gepauzeerd"
@@ -118,10 +117,10 @@
             "name": "device",
             "filter": "driver_id=nzbdriver"
           }
-        ]
+        ],
+        "id": "download_enabled_false"
       },
       {
-        "id": "download_enabled_true",
         "title": {
           "en": "Download queue just resumed",
           "nl": "Downloadwachtrij werd hervat"
@@ -136,10 +135,10 @@
             "name": "device",
             "filter": "driver_id=nzbdriver"
           }
-        ]
+        ],
+        "id": "download_enabled_true"
       },
       {
-        "id": "download_rate_changed",
         "title": {
           "en": "Download speed changed",
           "nl": "Downloadsnelheid is veranderd"
@@ -154,10 +153,10 @@
             "name": "device",
             "filter": "driver_id=nzbdriver"
           }
-        ]
+        ],
+        "id": "download_rate_changed"
       },
       {
-        "id": "download_size_changed",
         "title": {
           "en": "Total downloaded changed",
           "nl": "Totaal gedownload is veranderd"
@@ -172,10 +171,10 @@
             "name": "device",
             "filter": "driver_id=nzbdriver"
           }
-        ]
+        ],
+        "id": "download_size_changed"
       },
       {
-        "id": "free_disk_space_changed",
         "title": {
           "en": "Free disk space changed",
           "nl": "Vrije schijfruimte is veranderd"
@@ -190,28 +189,10 @@
             "name": "device",
             "filter": "driver_id=nzbdriver"
           }
-        ]
+        ],
+        "id": "free_disk_space_changed"
       },
       {
-        "id": "rate_limit_changed",
-        "title": {
-          "en": "Download limit changed",
-          "nl": "Downloadlimiet is veranderd"
-        },
-        "hint": {
-          "en": "This flowcard triggers when the download limit has changed.",
-          "nl": "Deze flowcard wordt geactiveerd wanneer de downloadlimiet veranderd is."
-        },
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=nzbdriver"
-          }
-        ]
-      },
-      {
-        "id": "program_reloaded",
         "title": {
           "en": "NZBGet was reloaded",
           "nl": "NZBGet werd herladen"
@@ -226,10 +207,10 @@
             "name": "device",
             "filter": "driver_id=nzbdriver"
           }
-        ]
+        ],
+        "id": "program_reloaded"
       },
       {
-        "id": "program_shutdown",
         "title": {
           "en": "NZBGet was shut down",
           "nl": "NZBGet werd afgesloten"
@@ -244,10 +225,28 @@
             "name": "device",
             "filter": "driver_id=nzbdriver"
           }
-        ]
+        ],
+        "id": "program_shutdown"
       },
       {
-        "id": "remaining_files_changed",
+        "title": {
+          "en": "Download limit changed",
+          "nl": "Downloadlimiet is veranderd"
+        },
+        "hint": {
+          "en": "This flowcard triggers when the download limit has changed.",
+          "nl": "Deze flowcard wordt geactiveerd wanneer de downloadlimiet veranderd is."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=nzbdriver"
+          }
+        ],
+        "id": "rate_limit_changed"
+      },
+      {
         "title": {
           "en": "Download queue changed",
           "nl": "Downloadwachtrij is veranderd"
@@ -262,10 +261,10 @@
             "name": "device",
             "filter": "driver_id=nzbdriver"
           }
-        ]
+        ],
+        "id": "remaining_files_changed"
       },
       {
-        "id": "remaining_size_changed",
         "title": {
           "en": "Download remaining changed",
           "nl": "Nog te downloaden is veranderd"
@@ -280,12 +279,12 @@
             "name": "device",
             "filter": "driver_id=nzbdriver"
           }
-        ]
+        ],
+        "id": "remaining_size_changed"
       }
     ],
     "conditions": [
       {
-        "id": "download_enabled",
         "title": {
           "en": "Download queue is !{{active|pauzed}}",
           "nl": "Downloadwachtrij is !{{actief|gepauzeerd}}"
@@ -300,12 +299,12 @@
             "name": "device",
             "filter": "driver_id=nzbdriver"
           }
-        ]
+        ],
+        "id": "download_enabled"
       }
     ],
     "actions": [
       {
-        "id": "pausedownload",
         "title": {
           "en": "Pause download queue",
           "nl": "Pauzeer downloadwachtrij"
@@ -320,28 +319,10 @@
             "name": "device",
             "filter": "driver_id=nzbdriver"
           }
-        ]
+        ],
+        "id": "pausedownload"
       },
       {
-        "id": "resumedownload",
-        "title": {
-          "en": "Resume download queue",
-          "nl": "Hervat downloadwachtrij"
-        },
-        "hint": {
-          "en": "Use this flowcard to resume the download queue.",
-          "nl": "Gebruik deze flowcard om de downloadwachtrij te hervatten."
-        },
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=nzbdriver"
-          }
-        ]
-      },
-      {
-        "id": "rate",
         "title": {
           "en": "Limit download speed",
           "nl": "Beperk downloadsnelheid"
@@ -356,11 +337,6 @@
         },
         "args": [
           {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=nzbdriver"
-          },
-          {
             "type": "number",
             "name": "download_rate",
             "title": {
@@ -372,29 +348,16 @@
             "placeholder": {
               "en": "MB/s"
             }
-          }
-        ]
-      },
-      {
-        "id": "scan",
-        "title": {
-          "en": "Scan incoming directory",
-          "nl": "Scan inkomende map"
-        },
-        "hint": {
-          "en": "Use this flowcard to scan the incoming directory for nzb-files.",
-          "nl": "Gebruik deze flowcard om de inkomende directory te scannen op nzb-bestanden."
-        },
-        "args": [
+          },
           {
             "type": "device",
             "name": "device",
             "filter": "driver_id=nzbdriver"
           }
-        ]
+        ],
+        "id": "rate"
       },
       {
-        "id": "reload",
         "title": {
           "en": "Reload NZBGet",
           "nl": "Herlaad NZBGet"
@@ -409,10 +372,46 @@
             "name": "device",
             "filter": "driver_id=nzbdriver"
           }
-        ]
+        ],
+        "id": "reload"
       },
       {
-        "id": "shutdown",
+        "title": {
+          "en": "Resume download queue",
+          "nl": "Hervat downloadwachtrij"
+        },
+        "hint": {
+          "en": "Use this flowcard to resume the download queue.",
+          "nl": "Gebruik deze flowcard om de downloadwachtrij te hervatten."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=nzbdriver"
+          }
+        ],
+        "id": "resumedownload"
+      },
+      {
+        "title": {
+          "en": "Scan incoming directory",
+          "nl": "Scan inkomende map"
+        },
+        "hint": {
+          "en": "Use this flowcard to scan the incoming directory for nzb-files.",
+          "nl": "Gebruik deze flowcard om de inkomende directory te scannen op nzb-bestanden."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=nzbdriver"
+          }
+        ],
+        "id": "scan"
+      },
+      {
         "title": {
           "en": "Shutdown NZBGet",
           "nl": "Sluit NZBGet af"
@@ -427,7 +426,8 @@
             "name": "device",
             "filter": "driver_id=nzbdriver"
           }
-        ]
+        ],
+        "id": "shutdown"
       }
     ]
   },

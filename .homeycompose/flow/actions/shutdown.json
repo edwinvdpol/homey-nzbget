@@ -6,5 +6,12 @@
   "hint": {
     "en": "Use this flowcard to shutdown NZBGet.",
     "nl": "Gebruik deze flowcard om NZBGet af te sluiten."
-  }
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=nzbdriver"
+    }
+  ]
 }

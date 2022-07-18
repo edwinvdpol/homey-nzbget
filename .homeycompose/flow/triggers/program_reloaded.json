@@ -6,5 +6,12 @@
   "hint": {
     "en": "This flowcard triggers when NZBGet was reloaded through Homey.",
     "nl": "Deze flowcard wordt geactiveerd wanneer NZBGet werd herladen via Homey."
-  }
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=nzbdriver"
+    }
+  ]
 }

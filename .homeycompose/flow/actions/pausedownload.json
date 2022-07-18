@@ -6,5 +6,12 @@
   "hint": {
     "en": "Use this flowcard to pauze the download queue.",
     "nl": "Gebruik deze flowcard om de downloadwachtrij te pauzeren."
-  }
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=nzbdriver"
+    }
+  ]
 }

@@ -6,5 +6,12 @@
   "hint": {
     "en": "Checks if the download queue is currently active/pauzed.",
     "nl": "Controleert of de downloadwachtrij momenteel actief/gepauzeerd is."
-  }
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=nzbdriver"
+    }
+  ]
 }
