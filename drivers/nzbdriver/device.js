@@ -2,6 +2,7 @@
 
 const Device = require('../../lib/Device');
 const {filled} = require('../../lib/Utils');
+const Client = require('../../lib/Client');
 
 class NZBDevice extends Device {
 
@@ -20,7 +21,7 @@ class NZBDevice extends Device {
 
   // Set device data
   handleSyncData(data) {
-    this.log('Update device', this.getData().id, JSON.stringify(data));
+    this.log('Update device', JSON.stringify(data));
 
     if (filled(data.ArticleCacheMB)) {
       this.setCapabilityValue('article_cache', parseFloat(data.ArticleCacheMB)).catch(this.error);
@@ -86,7 +87,7 @@ class NZBDevice extends Device {
 
     this.log(`Set download limit to ${limit} MB/s`);
 
-    await this.call('rate', null, [limit]);
+    await this.call('rate', [limit]);
 
     this.setCapabilityValue('rate_limit', limit).catch(this.error);
   }
@@ -103,7 +104,7 @@ class NZBDevice extends Device {
     const device = this;
 
     // Trigger program reloaded flow card
-    await this.homey.app.flow.reloadedTrigger.trigger(device);
+    await this.driver.reloadedTrigger.trigger(device);
   }
 
   // Resume download queue
@@ -134,12 +135,22 @@ class NZBDevice extends Device {
     const device = this;
 
     // Trigger program shutdown flow card
-    await this.homey.app.flow.shutdownTrigger.trigger(device);
+    await this.driver.shutdownTrigger.trigger(device);
   }
 
   /*
   | Support functions
   */
+
+  async call(cmd, params = []) {
+    try {
+      const client = new Client(this.getSettings());
+
+      return client.call(cmd, params);
+    } catch (err) {
+      throw new Error(this.homey.__(err.message));
+    }
+  }
 
   // Convert seconds to time
   toTime(sec) {
