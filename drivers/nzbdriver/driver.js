@@ -24,7 +24,7 @@ class NZBDriver extends Driver {
 
         // Check if the version valid
         if (Number(version) < 15) {
-          throw new Error(this.homey.__('api.version', {version}));
+          throw new Error(this.homey.__('api.version', { version }));
         }
 
         data.version = version;

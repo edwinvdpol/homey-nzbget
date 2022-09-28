@@ -1,7 +1,7 @@
 'use strict';
 
 const Device = require('../../lib/Device');
-const {filled} = require('../../lib/Utils');
+const { filled } = require('../../lib/Utils');
 const Client = require('../../lib/Client');
 
 class NZBDevice extends Device {
@@ -13,7 +13,9 @@ class NZBDevice extends Device {
   // Download enabled capability changed
   async onCapabilityDownloadEnabled(enabled) {
     if (enabled) {
-      return this.resumedownload();
+      await this.resumedownload();
+
+      return;
     }
 
     await this.pausedownload();
@@ -82,8 +84,8 @@ class NZBDevice extends Device {
   }
 
   // Set download speed limit (mb/s)
-  async rate(download_rate) {
-    const limit = Number(download_rate * 1000);
+  async rate(downloadRate) {
+    const limit = Number(downloadRate * 1000);
 
     this.log(`Set download limit to ${limit} MB/s`);
 
@@ -172,6 +174,7 @@ class NZBDevice extends Device {
 
     return `${hours}:${minutes}:${seconds}`;
   }
+
 }
 
 module.exports = NZBDevice;
