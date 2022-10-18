@@ -1,14 +1,7 @@
 {
-  "id": "server",
   "name": {
     "en": "Server"
   },
-  "platforms": [
-    "local"
-  ],
-  "connectivity": [
-    "lan"
-  ],
   "class": "other",
   "capabilities": [
     "download_enabled",
@@ -23,15 +16,16 @@
     "download_time",
     "uptime"
   ],
-  "pair": [
-    {
-      "id": "start"
-    }
-  ],
   "images": {
     "large": "{{driverAssetsPath}}/images/large.png",
     "small": "{{driverAssetsPath}}/images/small.png"
   },
+  "platforms": [
+    "local"
+  ],
+  "connectivity": [
+    "lan"
+  ],
   "settings": [
     {
       "type": "group",
@@ -110,6 +104,11 @@
           "value": "-"
         }
       ]
+    }
+  ],
+  "pair": [
+    {
+      "id": "start"
     }
   ]
 }

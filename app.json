@@ -38,11 +38,11 @@
       "bestanden"
     ]
   },
-  "permissions": [],
   "images": {
     "small": "/assets/images/small.png",
     "large": "/assets/images/large.png"
   },
+  "permissions": [],
   "author": {
     "name": "Edwin van de Pol",
     "email": "developer@edwinvandepol.nl"
@@ -433,16 +433,9 @@
   },
   "drivers": [
     {
-      "id": "nzbdriver",
       "name": {
         "en": "Server"
       },
-      "platforms": [
-        "local"
-      ],
-      "connectivity": [
-        "lan"
-      ],
       "class": "other",
       "capabilities": [
         "download_enabled",
@@ -457,15 +450,16 @@
         "download_time",
         "uptime"
       ],
-      "pair": [
-        {
-          "id": "start"
-        }
-      ],
       "images": {
         "large": "/drivers/nzbdriver/assets/images/large.png",
         "small": "/drivers/nzbdriver/assets/images/small.png"
       },
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
       "settings": [
         {
           "type": "group",
@@ -545,7 +539,13 @@
             }
           ]
         }
-      ]
+      ],
+      "pair": [
+        {
+          "id": "start"
+        }
+      ],
+      "id": "nzbdriver"
     }
   ],
   "capabilities": {
