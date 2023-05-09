@@ -30,7 +30,7 @@
     "lint": "eslint --ext .js,.ts --ignore-path .gitignore ."
   },
   "devDependencies": {
-    "@types/homey": "npm:homey-apps-sdk-v3-types@^0.3.3",
+    "@types/homey": "npm:homey-apps-sdk-v3-types@^0.3.4",
     "eslint-config-athom": "^3.1.1"
   }
 }
