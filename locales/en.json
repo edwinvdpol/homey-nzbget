@@ -1,11 +1,11 @@
 {
   "api": {
-    "badRequest": "Invalid API request",
-    "connection": "Could not connect to server",
-    "error": "A server error occurred",
-    "timeout": "The server did not respond in time",
-    "unauthorized": "Username or password is invalid",
-    "version": "Version __version__ is not supported"
+    "badRequest": "Invalid API request.",
+    "connection": "Could not connect to server.",
+    "error": "A server error occurred.",
+    "timeout": "The server did not respond in time.",
+    "unauthorized": "Username or password is invalid.",
+    "version": "Version __version__ is not supported."
   },
   "add": "Add",
   "password": "Password",
