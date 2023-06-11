@@ -7,7 +7,7 @@ const Client = require('../../lib/Client');
 class NZBDevice extends Device {
 
   /*
-  | Capabilities
+  | Device events
   */
 
   // Download enabled capability changed
@@ -21,7 +21,11 @@ class NZBDevice extends Device {
     await this.pausedownload();
   }
 
-  // Set device data
+  /*
+  | Synchronization functions
+  */
+
+  // Handle sync data
   handleSyncData(data) {
     this.log('Update device', JSON.stringify(data));
 
@@ -103,10 +107,12 @@ class NZBDevice extends Device {
 
     await this.call('reload');
 
-    const device = this;
+    let device = this;
 
     // Trigger program reloaded flow card
-    await this.driver.reloadedTrigger.trigger(device);
+    await this.homey.reloadedTrigger.trigger(device);
+
+    device = null;
   }
 
   // Resume download queue
@@ -134,10 +140,12 @@ class NZBDevice extends Device {
 
     await this.call('shutdown');
 
-    const device = this;
+    let device = this;
 
     // Trigger program shutdown flow card
-    await this.driver.shutdownTrigger.trigger(device);
+    await this.homey.shutdownTrigger.trigger(device);
+
+    device = null;
   }
 
   /*
@@ -145,12 +153,17 @@ class NZBDevice extends Device {
   */
 
   async call(cmd, params = []) {
+    let client;
+
     try {
-      const client = new Client(this.getSettings());
+      client = new Client(this.getSettings());
 
       return client.call(cmd, params);
     } catch (err) {
+      this.error('call error', err);
       throw new Error(this.homey.__(err.message));
+    } finally {
+      client = null;
     }
   }
 

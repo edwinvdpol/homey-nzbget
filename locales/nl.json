@@ -1,11 +1,12 @@
 {
-  "api": {
-    "badRequest": "Ongeldig API request.",
-    "connection": "Kon geen verbinding met server maken.",
-    "error": "Er is een serverfout opgetreden.",
-    "timeout": "De server reageerde niet op tijd.",
-    "unauthorized": "Gebruikersnaam of wachtwoord is ongeldig.",
-    "version": "Versie __version__ wordt niet ondersteund."
+  "errors": {
+    "400": "Verzoek naar server is onjuist",
+    "401": "Inloggegevens zijn onjuist",
+    "403": "Toegang tot server is geweigerd",
+    "50x": "Server is niet beschikbaar",
+    "network": "Server is niet bereikbaar",
+    "version": "Versie __version__ wordt niet ondersteund",
+    "unknown": "Er is een onbekende fout opgetreden"
   },
   "add": "Toevoegen",
   "password": "Wachtwoord",
