@@ -5,8 +5,8 @@
     "403": "Toegang tot server is geweigerd",
     "50x": "Server is niet beschikbaar",
     "network": "Server is niet bereikbaar",
-    "version": "Versie __version__ wordt niet ondersteund",
-    "unknown": "Er is een onbekende fout opgetreden"
+    "unknown": "Er is een onbekende fout opgetreden",
+    "version": "Versie __version__ wordt niet ondersteund"
   },
   "add": "Toevoegen",
   "password": "Wachtwoord",

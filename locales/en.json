@@ -5,8 +5,8 @@
     "403": "Access to server is denied",
     "50x": "Server is unavailable",
     "network": "Server is unreachable",
-    "version": "Version __version__ is not supported",
-    "unknown": "An unknown error has occurred"
+    "unknown": "An unknown error has occurred",
+    "version": "Version __version__ is not supported"
   },
   "add": "Add",
   "password": "Password",
