@@ -1,10 +1,10 @@
 {
   "type": "number",
-  "decimals": 2,
   "title": {
     "en": "Download speed",
     "nl": "Downloadsnelheid"
   },
+  "decimals": 2,
   "icon": "/assets/download-speed.svg",
   "insights": true,
   "getable": true,

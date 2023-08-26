@@ -551,11 +551,11 @@
   "capabilities": {
     "article_cache": {
       "type": "number",
-      "decimals": 2,
       "title": {
         "en": "Article cache",
         "nl": "Artikel cache"
       },
+      "decimals": 2,
       "icon": "/assets/harddisk.svg",
       "insights": true,
       "getable": true,
@@ -566,11 +566,11 @@
     },
     "average_rate": {
       "type": "number",
-      "decimals": 2,
       "title": {
         "en": "Average speed",
         "nl": "Gemiddelde snelheid"
       },
+      "decimals": 2,
       "icon": "/assets/download-speed.svg",
       "insights": true,
       "getable": true,
@@ -592,11 +592,11 @@
     },
     "download_rate": {
       "type": "number",
-      "decimals": 2,
       "title": {
         "en": "Download speed",
         "nl": "Downloadsnelheid"
       },
+      "decimals": 2,
       "icon": "/assets/download-speed.svg",
       "insights": true,
       "getable": true,
@@ -607,11 +607,11 @@
     },
     "download_size": {
       "type": "number",
-      "decimals": 2,
       "title": {
         "en": "Total downloaded",
         "nl": "Totaal gedownload"
       },
+      "decimals": 2,
       "icon": "/assets/harddisk.svg",
       "getable": true,
       "setable": false,
@@ -667,11 +667,11 @@
     },
     "remaining_size": {
       "type": "number",
-      "decimals": 2,
       "title": {
         "en": "Download remaining",
         "nl": "Nog te downloaden"
       },
+      "decimals": 2,
       "icon": "/assets/harddisk.svg",
       "getable": true,
       "setable": false,
