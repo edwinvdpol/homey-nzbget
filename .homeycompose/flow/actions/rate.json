@@ -16,8 +16,8 @@
       "type": "number",
       "name": "download_rate",
       "title": {
-        "en": "Download speed",
-        "nl": "Downloadsnelheid"
+        "en": "download speed",
+        "nl": "downloadsnelheid"
       },
       "min": 0,
       "step": 1,
