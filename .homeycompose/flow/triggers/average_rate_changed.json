@@ -4,8 +4,8 @@
     "nl": "Gemiddelde snelheid is veranderd"
   },
   "hint": {
-    "en": "This flowcard triggers when the average download speed has changed.",
-    "nl": "Deze flowcard wordt geactiveerd wanneer de gemiddelde downloadsnelheid veranderd is."
+    "en": "This flowcard triggers when the average download speed was changed.",
+    "nl": "Deze flowcard wordt geactiveerd wanneer de gemiddelde downloadsnelheid veranderd werd."
   },
   "args": [
     {

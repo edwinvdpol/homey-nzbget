@@ -4,8 +4,8 @@
     "nl": "Downloadwachtrij is veranderd"
   },
   "hint": {
-    "en": "This flowcard triggers when the amount of files in queue has changed.",
-    "nl": "Deze flowcard wordt geactiveerd wanneer het aantal bestanden in de wachtrij veranderd is."
+    "en": "This flowcard triggers when the amount of files in queue was changed.",
+    "nl": "Deze flowcard wordt geactiveerd wanneer het aantal bestanden in de wachtrij veranderd werd."
   },
   "args": [
     {

@@ -72,12 +72,12 @@
     "triggers": [
       {
         "title": {
-          "en": "Article cache has changed",
+          "en": "Article cache changed",
           "nl": "Artikelcache is veranderd"
         },
         "hint": {
-          "en": "This flowcard triggers when the article cache has changed.",
-          "nl": "Deze flowcard wordt geactiveerd wanneer de artikelcache veranderd is."
+          "en": "This flowcard triggers when the article cache was changed.",
+          "nl": "Deze flowcard wordt geactiveerd wanneer de artikelcache veranderd werd."
         },
         "args": [
           {
@@ -94,8 +94,8 @@
           "nl": "Gemiddelde snelheid is veranderd"
         },
         "hint": {
-          "en": "This flowcard triggers when the average download speed has changed.",
-          "nl": "Deze flowcard wordt geactiveerd wanneer de gemiddelde downloadsnelheid veranderd is."
+          "en": "This flowcard triggers when the average download speed was changed.",
+          "nl": "Deze flowcard wordt geactiveerd wanneer de gemiddelde downloadsnelheid veranderd werd."
         },
         "args": [
           {
@@ -148,8 +148,8 @@
           "nl": "Downloadsnelheid is veranderd"
         },
         "hint": {
-          "en": "This flowcard triggers when the download speed has changed.",
-          "nl": "Deze flowcard wordt geactiveerd wanneer de downloadsnelheid veranderd is."
+          "en": "This flowcard triggers when the download speed was changed.",
+          "nl": "Deze flowcard wordt geactiveerd wanneer de downloadsnelheid veranderd werd."
         },
         "args": [
           {
@@ -166,8 +166,8 @@
           "nl": "Totaal gedownload is veranderd"
         },
         "hint": {
-          "en": "This flowcard triggers when the total downloaded has changed.",
-          "nl": "Deze flowcard wordt geactiveerd wanneer het totaal gedownload veranderd is."
+          "en": "This flowcard triggers when the total downloaded was changed.",
+          "nl": "Deze flowcard wordt geactiveerd wanneer het totaal gedownload veranderd werd."
         },
         "args": [
           {
@@ -184,8 +184,8 @@
           "nl": "Vrije schijfruimte is veranderd"
         },
         "hint": {
-          "en": "This flowcard triggers when the free disk space has changed.",
-          "nl": "Deze flowcard wordt geactiveerd wanneer de vrije schijfruimte veranderd is."
+          "en": "This flowcard triggers when the free disk space was changed.",
+          "nl": "Deze flowcard wordt geactiveerd wanneer de vrije schijfruimte veranderd werd."
         },
         "args": [
           {
@@ -238,8 +238,8 @@
           "nl": "Downloadlimiet is veranderd"
         },
         "hint": {
-          "en": "This flowcard triggers when the download limit has changed.",
-          "nl": "Deze flowcard wordt geactiveerd wanneer de downloadlimiet veranderd is."
+          "en": "This flowcard triggers when the download limit was changed.",
+          "nl": "Deze flowcard wordt geactiveerd wanneer de downloadlimiet veranderd werd."
         },
         "args": [
           {
@@ -256,8 +256,8 @@
           "nl": "Downloadwachtrij is veranderd"
         },
         "hint": {
-          "en": "This flowcard triggers when the amount of files in queue has changed.",
-          "nl": "Deze flowcard wordt geactiveerd wanneer het aantal bestanden in de wachtrij veranderd is."
+          "en": "This flowcard triggers when the amount of files in queue was changed.",
+          "nl": "Deze flowcard wordt geactiveerd wanneer het aantal bestanden in de wachtrij veranderd werd."
         },
         "args": [
           {
@@ -274,8 +274,8 @@
           "nl": "Nog te downloaden is veranderd"
         },
         "hint": {
-          "en": "This flowcard triggers when the download remaining has changed.",
-          "nl": "Deze flowcard wordt geactiveerd wanneer het nog te downloaden veranderd is."
+          "en": "This flowcard triggers when the download remaining was changed.",
+          "nl": "Deze flowcard wordt geactiveerd wanneer het nog te downloaden veranderd werd."
         },
         "args": [
           {

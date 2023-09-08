@@ -4,8 +4,8 @@
     "nl": "Nog te downloaden is veranderd"
   },
   "hint": {
-    "en": "This flowcard triggers when the download remaining has changed.",
-    "nl": "Deze flowcard wordt geactiveerd wanneer het nog te downloaden veranderd is."
+    "en": "This flowcard triggers when the download remaining was changed.",
+    "nl": "Deze flowcard wordt geactiveerd wanneer het nog te downloaden veranderd werd."
   },
   "args": [
     {

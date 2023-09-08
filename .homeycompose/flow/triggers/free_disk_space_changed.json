@@ -4,8 +4,8 @@
     "nl": "Vrije schijfruimte is veranderd"
   },
   "hint": {
-    "en": "This flowcard triggers when the free disk space has changed.",
-    "nl": "Deze flowcard wordt geactiveerd wanneer de vrije schijfruimte veranderd is."
+    "en": "This flowcard triggers when the free disk space was changed.",
+    "nl": "Deze flowcard wordt geactiveerd wanneer de vrije schijfruimte veranderd werd."
   },
   "args": [
     {
