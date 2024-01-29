@@ -1,7 +1,7 @@
 'use strict';
 
 const Device = require('../../lib/Device');
-const { filled } = require('../../lib/Utils');
+const { blank, filled } = require('../../lib/Utils');
 const Client = require('../../lib/Client');
 
 class NZBDevice extends Device {
@@ -27,6 +27,8 @@ class NZBDevice extends Device {
 
   // Handle sync data
   handleSyncData(data) {
+    if (blank(data)) return;
+
     this.log('Update device', JSON.stringify(data));
 
     if (filled(data.ArticleCacheMB)) {
