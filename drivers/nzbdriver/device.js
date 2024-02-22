@@ -162,7 +162,7 @@ class NZBDevice extends Device {
 
       return client.call(cmd, params);
     } catch (err) {
-      this.error('call error', err);
+      this.error('[Call]', err.toString());
       throw new Error(this.homey.__(err.message));
     } finally {
       client = null;
