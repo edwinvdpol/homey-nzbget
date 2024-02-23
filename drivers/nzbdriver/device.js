@@ -104,14 +104,12 @@ class NZBDevice extends Device {
   async reload() {
     this.log('Reload');
 
-    // Wait until the driver is ready
-    await this.driver.ready();
-
     await this.call('reload');
 
     let device = this;
 
     // Trigger program reloaded flow card
+    await this.driver.ready();
     await this.homey.reloadedTrigger.trigger(device);
 
     device = null;
@@ -137,14 +135,12 @@ class NZBDevice extends Device {
   async shutdown() {
     this.log('Shutdown');
 
-    // Wait until the driver is ready
-    await this.driver.ready();
-
     await this.call('shutdown');
 
     let device = this;
 
     // Trigger program shutdown flow card
+    await this.driver.ready();
     await this.homey.shutdownTrigger.trigger(device);
 
     device = null;
