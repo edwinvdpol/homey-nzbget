@@ -8,8 +8,8 @@
     "unknown": "Er is een onbekende fout opgetreden",
     "version": "Versie __version__ wordt niet ondersteund"
   },
-  "add": "Toevoegen",
-  "password": "Wachtwoord",
-  "port": "Poort",
-  "username": "Gebruikersnaam"
+  "pair": {
+    "port": "Poort",
+    "saving": "Opslaan"
+  }
 }

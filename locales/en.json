@@ -8,8 +8,8 @@
     "unknown": "An unknown error has occurred",
     "version": "Version __version__ is not supported"
   },
-  "add": "Add",
-  "password": "Password",
-  "port": "Port",
-  "username": "Username"
+  "pair": {
+    "port": "Port",
+    "saving": "Saving"
+  }
 }
