@@ -464,12 +464,18 @@
       "connectivity": [
         "lan"
       ],
+      "pair": [
+        {
+          "id": "start"
+        }
+      ],
+      "id": "nzbdriver",
       "settings": [
         {
           "type": "group",
           "label": {
-            "en": "General settings",
-            "nl": "Algemene instellingen"
+            "en": "General",
+            "nl": "Algemeen"
           },
           "children": [
             {
@@ -492,8 +498,7 @@
         {
           "type": "group",
           "label": {
-            "en": "Server settings",
-            "nl": "Server instellingen"
+            "en": "Server"
           },
           "children": [
             {
@@ -519,8 +524,7 @@
         {
           "type": "group",
           "label": {
-            "en": "Login credentials",
-            "nl": "Inloggegevens"
+            "en": "Account"
           },
           "children": [
             {
@@ -543,13 +547,7 @@
             }
           ]
         }
-      ],
-      "pair": [
-        {
-          "id": "start"
-        }
-      ],
-      "id": "nzbdriver"
+      ]
     }
   ],
   "capabilities": {
