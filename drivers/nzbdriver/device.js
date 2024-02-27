@@ -154,7 +154,7 @@ class NZBDevice extends Device {
     let client;
 
     try {
-      client = new Client(this.getSettings());
+      client = new Client(this.getStore());
 
       return client.call(cmd, params);
     } catch (err) {
