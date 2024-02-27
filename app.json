@@ -469,7 +469,11 @@
           "id": "credentials"
         }
       ],
-      "id": "nzbdriver",
+      "repair": [
+        {
+          "id": "credentials"
+        }
+      ],
       "settings": [
         {
           "type": "group",
@@ -494,60 +498,9 @@
               }
             }
           ]
-        },
-        {
-          "type": "group",
-          "label": {
-            "en": "Server"
-          },
-          "children": [
-            {
-              "id": "host",
-              "type": "text",
-              "label": {
-                "en": "URL"
-              },
-              "value": "-"
-            },
-            {
-              "id": "port",
-              "type": "number",
-              "label": {
-                "en": "Port",
-                "nl": "Poort"
-              },
-              "value": 6789,
-              "min": 1
-            }
-          ]
-        },
-        {
-          "type": "group",
-          "label": {
-            "en": "Account"
-          },
-          "children": [
-            {
-              "id": "user",
-              "type": "text",
-              "label": {
-                "en": "Username",
-                "nl": "Gebruikersnaam"
-              },
-              "value": "-"
-            },
-            {
-              "id": "pass",
-              "type": "password",
-              "label": {
-                "en": "Password",
-                "nl": "Wachtwoord"
-              },
-              "value": "-"
-            }
-          ]
         }
-      ]
+      ],
+      "id": "nzbdriver"
     }
   ],
   "capabilities": {

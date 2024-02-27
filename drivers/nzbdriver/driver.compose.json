@@ -30,5 +30,36 @@
     {
       "id": "credentials"
     }
+  ],
+  "repair": [
+    {
+      "id": "credentials"
+    }
+  ],
+  "settings": [
+    {
+      "type": "group",
+      "label": {
+        "en": "General",
+        "nl": "Algemeen"
+      },
+      "children": [
+        {
+          "id": "refresh_interval",
+          "type": "number",
+          "label": {
+            "en": "Refresh interval",
+            "nl": "Vernieuwingsinterval"
+          },
+          "value": 20,
+          "min": 5,
+          "max": 1800,
+          "hint": {
+            "en": "The refresh interval of the statistics in seconds.",
+            "nl": "Het vernieuwingsinterval van de statistieken in seconden."
+          }
+        }
+      ]
+    }
   ]
 }
