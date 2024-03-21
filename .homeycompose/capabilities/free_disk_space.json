@@ -4,10 +4,10 @@
     "en": "Free disk space",
     "nl": "Vrije schijfruimte"
   },
-  "icon": "/assets/harddisk.svg",
   "getable": true,
   "setable": false,
   "units": {
     "en": "GB"
-  }
+  },
+  "icon": "/assets/harddisk.svg"
 }

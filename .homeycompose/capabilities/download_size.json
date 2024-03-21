@@ -4,11 +4,11 @@
     "en": "Total downloaded",
     "nl": "Totaal gedownload"
   },
-  "decimals": 2,
-  "icon": "/assets/harddisk.svg",
   "getable": true,
   "setable": false,
+  "decimals": 2,
   "units": {
     "en": "GB"
-  }
+  },
+  "icon": "/assets/harddisk.svg"
 }

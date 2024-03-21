@@ -4,7 +4,7 @@
     "en": "Download queue",
     "nl": "Downloadwachtrij"
   },
-  "icon": "/assets/file.svg",
   "getable": true,
-  "setable": false
+  "setable": false,
+  "icon": "/assets/file.svg"
 }

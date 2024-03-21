@@ -4,7 +4,7 @@
     "en": "Download time",
     "nl": "Downloadtijd"
   },
-  "icon": "/assets/clock.svg",
   "getable": true,
-  "setable": false
+  "setable": false,
+  "icon": "/assets/clock.svg"
 }

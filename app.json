@@ -510,14 +510,14 @@
         "en": "Article cache",
         "nl": "Artikel cache"
       },
-      "decimals": 2,
-      "icon": "/assets/harddisk.svg",
-      "insights": true,
       "getable": true,
       "setable": false,
+      "insights": true,
+      "decimals": 2,
       "units": {
         "en": "MB"
-      }
+      },
+      "icon": "/assets/harddisk.svg"
     },
     "average_rate": {
       "type": "number",
@@ -525,14 +525,14 @@
         "en": "Average speed",
         "nl": "Gemiddelde snelheid"
       },
-      "decimals": 2,
-      "icon": "/assets/download-speed.svg",
-      "insights": true,
       "getable": true,
       "setable": false,
+      "insights": true,
+      "decimals": 2,
       "units": {
         "en": "MB/s"
-      }
+      },
+      "icon": "/assets/download-speed.svg"
     },
     "download_enabled": {
       "type": "boolean",
@@ -542,6 +542,15 @@
       },
       "getable": true,
       "setable": true,
+      "insights": true,
+      "insightsTitleTrue": {
+        "en": "Download enabled",
+        "nl": "Download ingeschakeld"
+      },
+      "insightsTitleFalse": {
+        "en": "Download disabled",
+        "nl": "Download uitgeschakeld"
+      },
       "uiComponent": "toggle",
       "uiQuickAction": false
     },
@@ -551,14 +560,14 @@
         "en": "Download speed",
         "nl": "Downloadsnelheid"
       },
-      "decimals": 2,
-      "icon": "/assets/download-speed.svg",
-      "insights": true,
       "getable": true,
       "setable": false,
+      "insights": true,
+      "decimals": 2,
       "units": {
         "en": "MB/s"
-      }
+      },
+      "icon": "/assets/download-speed.svg"
     },
     "download_size": {
       "type": "number",
@@ -566,13 +575,13 @@
         "en": "Total downloaded",
         "nl": "Totaal gedownload"
       },
-      "decimals": 2,
-      "icon": "/assets/harddisk.svg",
       "getable": true,
       "setable": false,
+      "decimals": 2,
       "units": {
         "en": "GB"
-      }
+      },
+      "icon": "/assets/harddisk.svg"
     },
     "download_time": {
       "type": "string",
@@ -580,9 +589,9 @@
         "en": "Download time",
         "nl": "Downloadtijd"
       },
-      "icon": "/assets/clock.svg",
       "getable": true,
-      "setable": false
+      "setable": false,
+      "icon": "/assets/clock.svg"
     },
     "free_disk_space": {
       "type": "number",
@@ -590,12 +599,12 @@
         "en": "Free disk space",
         "nl": "Vrije schijfruimte"
       },
-      "icon": "/assets/harddisk.svg",
       "getable": true,
       "setable": false,
       "units": {
         "en": "GB"
-      }
+      },
+      "icon": "/assets/harddisk.svg"
     },
     "rate_limit": {
       "type": "number",
@@ -603,12 +612,12 @@
         "en": "Download limit",
         "nl": "Downloadlimiet"
       },
-      "icon": "/assets/download-speed.svg",
       "getable": true,
       "setable": false,
       "units": {
         "en": "MB/s"
-      }
+      },
+      "icon": "/assets/download-speed.svg"
     },
     "remaining_files": {
       "type": "number",
@@ -616,9 +625,9 @@
         "en": "Download queue",
         "nl": "Downloadwachtrij"
       },
-      "icon": "/assets/file.svg",
       "getable": true,
-      "setable": false
+      "setable": false,
+      "icon": "/assets/file.svg"
     },
     "remaining_size": {
       "type": "number",
@@ -626,22 +635,22 @@
         "en": "Download remaining",
         "nl": "Nog te downloaden"
       },
-      "decimals": 2,
-      "icon": "/assets/harddisk.svg",
       "getable": true,
       "setable": false,
+      "decimals": 2,
       "units": {
         "en": "MB"
-      }
+      },
+      "icon": "/assets/harddisk.svg"
     },
     "uptime": {
       "type": "string",
       "title": {
         "en": "Uptime"
       },
-      "icon": "/assets/clock.svg",
       "getable": true,
-      "setable": false
+      "setable": false,
+      "icon": "/assets/clock.svg"
     }
   }
 }

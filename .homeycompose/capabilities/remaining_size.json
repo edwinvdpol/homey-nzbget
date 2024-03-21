@@ -4,11 +4,11 @@
     "en": "Download remaining",
     "nl": "Nog te downloaden"
   },
-  "decimals": 2,
-  "icon": "/assets/harddisk.svg",
   "getable": true,
   "setable": false,
+  "decimals": 2,
   "units": {
     "en": "MB"
-  }
+  },
+  "icon": "/assets/harddisk.svg"
 }

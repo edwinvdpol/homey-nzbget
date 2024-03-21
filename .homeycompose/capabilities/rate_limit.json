@@ -4,10 +4,10 @@
     "en": "Download limit",
     "nl": "Downloadlimiet"
   },
-  "icon": "/assets/download-speed.svg",
   "getable": true,
   "setable": false,
   "units": {
     "en": "MB/s"
-  }
+  },
+  "icon": "/assets/download-speed.svg"
 }

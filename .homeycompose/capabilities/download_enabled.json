@@ -6,6 +6,15 @@
   },
   "getable": true,
   "setable": true,
+  "insights": true,
+  "insightsTitleTrue": {
+    "en": "Download enabled",
+    "nl": "Download ingeschakeld"
+  },
+  "insightsTitleFalse": {
+    "en": "Download disabled",
+    "nl": "Download uitgeschakeld"
+  },
   "uiComponent": "toggle",
   "uiQuickAction": false
 }

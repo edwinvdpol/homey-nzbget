@@ -4,12 +4,12 @@
     "en": "Article cache",
     "nl": "Artikel cache"
   },
-  "decimals": 2,
-  "icon": "/assets/harddisk.svg",
-  "insights": true,
   "getable": true,
   "setable": false,
+  "insights": true,
+  "decimals": 2,
   "units": {
     "en": "MB"
-  }
+  },
+  "icon": "/assets/harddisk.svg"
 }

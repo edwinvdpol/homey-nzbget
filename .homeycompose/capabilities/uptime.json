@@ -3,7 +3,7 @@
   "title": {
     "en": "Uptime"
   },
-  "icon": "/assets/clock.svg",
   "getable": true,
-  "setable": false
+  "setable": false,
+  "icon": "/assets/clock.svg"
 }
