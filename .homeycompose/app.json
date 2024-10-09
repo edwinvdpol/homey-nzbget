@@ -1,6 +1,6 @@
 {
   "id": "net.nzbget",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "compatibility": ">=7.4.0",
   "platforms": [
     "local"
