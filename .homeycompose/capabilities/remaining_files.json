@@ -6,5 +6,5 @@
   },
   "getable": true,
   "setable": false,
-  "icon": "/assets/file.svg"
+  "icon": "/assets/capabilities/file.svg"
 }

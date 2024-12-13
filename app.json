@@ -517,7 +517,7 @@
       "units": {
         "en": "MB"
       },
-      "icon": "/assets/harddisk.svg"
+      "icon": "/assets/capabilities/harddisk.svg"
     },
     "average_rate": {
       "type": "number",
@@ -532,7 +532,7 @@
       "units": {
         "en": "MB/s"
       },
-      "icon": "/assets/download-speed.svg"
+      "icon": "/assets/capabilities/download-speed.svg"
     },
     "download_enabled": {
       "type": "boolean",
@@ -567,7 +567,7 @@
       "units": {
         "en": "MB/s"
       },
-      "icon": "/assets/download-speed.svg"
+      "icon": "/assets/capabilities/download-speed.svg"
     },
     "download_size": {
       "type": "number",
@@ -581,7 +581,7 @@
       "units": {
         "en": "GB"
       },
-      "icon": "/assets/harddisk.svg"
+      "icon": "/assets/capabilities/harddisk.svg"
     },
     "download_time": {
       "type": "string",
@@ -591,7 +591,7 @@
       },
       "getable": true,
       "setable": false,
-      "icon": "/assets/clock.svg"
+      "icon": "/assets/capabilities/clock.svg"
     },
     "free_disk_space": {
       "type": "number",
@@ -604,7 +604,7 @@
       "units": {
         "en": "GB"
       },
-      "icon": "/assets/harddisk.svg"
+      "icon": "/assets/capabilities/harddisk.svg"
     },
     "rate_limit": {
       "type": "number",
@@ -617,7 +617,7 @@
       "units": {
         "en": "MB/s"
       },
-      "icon": "/assets/download-speed.svg"
+      "icon": "/assets/capabilities/download-speed.svg"
     },
     "remaining_files": {
       "type": "number",
@@ -627,7 +627,7 @@
       },
       "getable": true,
       "setable": false,
-      "icon": "/assets/file.svg"
+      "icon": "/assets/capabilities/file.svg"
     },
     "remaining_size": {
       "type": "number",
@@ -641,7 +641,7 @@
       "units": {
         "en": "MB"
       },
-      "icon": "/assets/harddisk.svg"
+      "icon": "/assets/capabilities/harddisk.svg"
     },
     "uptime": {
       "type": "string",
@@ -650,7 +650,7 @@
       },
       "getable": true,
       "setable": false,
-      "icon": "/assets/clock.svg"
+      "icon": "/assets/capabilities/clock.svg"
     }
   }
 }
