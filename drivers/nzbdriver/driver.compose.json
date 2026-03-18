@@ -51,7 +51,7 @@
             "en": "Refresh interval",
             "nl": "Vernieuwingsinterval"
           },
-          "value": 20,
+          "value": 10,
           "min": 5,
           "max": 1800,
           "hint": {
